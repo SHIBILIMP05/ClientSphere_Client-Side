@@ -1,6 +1,5 @@
 import { Route,Routes } from "react-router-dom"
-import Login from "../common features/Login"
-import Dashboard from "../pages/head/Dashboard"
+import Login from "../features/common/Login"
 import HeadAuthentication from "../services/authentications/HeadLogAuth"
 import HeadLogOutAuth from "../services/authentications/HeadLogOutAuth"
 interface position{

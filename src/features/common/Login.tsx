@@ -1,7 +1,8 @@
 import { useState } from "react";
-import LoginLayout from "../components/LoginLayout";
-import { adminLogin } from "../services/apis/adminApi";
+import LoginLayout from "../../components/LoginLayout";
+import { adminLogin } from "../../services/apis/adminApi";
 import { useNavigate } from "react-router-dom";
+import { headLogin } from "../../services/apis/headApi";
 interface position {
     position: string;
 }
@@ -11,12 +12,12 @@ const Login = ({ position }: position) => {
     const navigate = useNavigate();
 
     const handleLogin = () => {
-
+        let status;
         switch (position) {
             case "admin":
-                const status = adminLogin({ email, password });
+                 status = adminLogin({ email, password });
                 status.then((data) => {
-                    console.log("status====>", data);
+                    console.log("admin status====>", data);
                     if (data.admin.status === 200 && data.admin.accessToken) {
                         localStorage.setItem("adminToken", data.admin.accessToken);
                         return navigate("/admin/dashboard");
@@ -24,12 +25,12 @@ const Login = ({ position }: position) => {
                 });
                 break
             case "head":
-                const status = adminLogin({ email, password });
+                 status = headLogin({ email, password });
                 status.then((data) => {
-                    console.log("status====>", data);
-                    if (data.admin.status === 200 && data.admin.accessToken) {
-                        localStorage.setItem("adminToken", data.admin.accessToken);
-                        return navigate("/admin/dashboard");
+                    console.log("Head status====>", data);
+                    if (data.head.status === 200 && data.head.accessToken) {
+                        localStorage.setItem("headToken", data.head.accessToken);
+                        return navigate("/head/dashboard");
                     }
                 });
                 break

@@ -8,7 +8,7 @@ const instance = axios.create({
 
 export const adminLogin =async (data:AdminDetails)=>{
     console.log("before",data);
-    const response = await instance.post('/admin/login',data)
+    const response = await instance.post('/api/auth/admin/login',data)
     console.log("rsponse in client-side::",response);
     return response.data
     

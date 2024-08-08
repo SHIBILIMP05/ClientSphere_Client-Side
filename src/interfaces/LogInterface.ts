@@ -10,3 +10,7 @@ export interface AdminDetails {
     password:string
 }
 
+export interface HeadDetails{
+    email:string,
+    password:string
+}

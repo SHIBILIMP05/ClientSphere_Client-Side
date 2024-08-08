@@ -8,7 +8,9 @@ export default {
     extend: {
       backgroundColor:{
         B1:"#7D50E1",
-        
+        B2:"#8868EA",
+        B3:"#A593F2",
+        B4:"#F5F4FE"
         
       },
       borderRadius:{
@@ -19,7 +21,11 @@ export default {
       textColor:{
         H1:"#A3A5AA",
         B1:"#7D50E1"
-      },borderColor:{
+      },
+      fontSize:{
+        TS1:"15px"
+      }
+      ,borderColor:{
         H1:"#A3A5AA"
       }
     },
