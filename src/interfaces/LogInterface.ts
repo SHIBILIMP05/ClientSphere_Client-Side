@@ -9,3 +9,4 @@ export interface AdminDetails {
     email:string
     password:string
 }
+

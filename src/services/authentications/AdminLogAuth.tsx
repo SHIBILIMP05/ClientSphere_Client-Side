@@ -3,7 +3,7 @@ import { Children_I } from "../../interfaces/LogInterface";
 
 const AdminAuthentication = ({ children}:Children_I) => {
   const token = Boolean(localStorage.getItem("adminToken"));
-  return token ? children : <Navigate to="/login" />;
+  return token ? children : <Navigate to="/admin/login" />;
 };
 
 export default AdminAuthentication;

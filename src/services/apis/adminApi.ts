@@ -9,8 +9,7 @@ const instance = axios.create({
 export const adminLogin =async (data:AdminDetails)=>{
     console.log("before",data);
     const response = await instance.post('/admin/login',data)
-    console.log("rsponse in clitside::",response);
-    
-
+    console.log("rsponse in client-side::",response);
+    return response.data
     
 }
