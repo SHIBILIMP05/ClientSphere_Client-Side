@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { adminCreateEmploye } from '../../services/apis/adminApi';
 
 const EmployeeForm: React.FC = () => {
   const [name, setName] = useState('');
@@ -6,9 +7,17 @@ const EmployeeForm: React.FC = () => {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
+    
     e.preventDefault();
-    // Handle form submission logic here
     console.log({ name, position, email });
+    const status = adminCreateEmploye({ name, position, email })
+    status.then((res)=>{
+      if(res){
+        
+      }
+    })
+
+
   };
 
   return (
