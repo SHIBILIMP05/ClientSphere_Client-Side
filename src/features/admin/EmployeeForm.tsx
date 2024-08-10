@@ -1,22 +1,38 @@
 import React, { useState } from 'react';
 import { adminCreateEmploye } from '../../services/apis/adminApi';
 import { Bounce, toast } from 'react-toastify';
+import Modal from '../../components/Modal';
+import EmployeeCredentialDetails from './EmployeeCredentialDetails';
 
-const EmployeeForm: React.FC = () => {
+interface EmployeeFormProps {
+  closeModal_1: () => void;
+}
+
+const EmployeeForm: React.FC<EmployeeFormProps>  = ({closeModal_1}) => {
+
   const [name, setName] = useState('');
   const [position, setPosition] = useState('');
   const [email, setEmail] = useState('');
+  const [isOpen,setIsOpen] = useState(false)
+  const [employeId,setEmployeId] = useState('')
+  const [employePassword,setEmployePassword] = useState('')
+
+  
+  const closeModal =()=>{
+    setIsOpen(false)
+    closeModal_1()
+  }
 
   const handleSubmit = (e: React.FormEvent) => {
-
     e.preventDefault();
     console.log({ name, position, email });
     try {
-
       const status = adminCreateEmploye({ name, position, email })
       status.then((res) => {
         if (res.employeeDetails.status === 200) {
           console.log('logedin==>', res.employeeDetails);
+          setEmployeId(res.employeeDetails.employeId)
+          setEmployePassword(res.employeeDetails.employePassword)
           toast.success(res.employeeDetails.message, {
             position: "top-center",
             autoClose: 5000,
@@ -28,7 +44,8 @@ const EmployeeForm: React.FC = () => {
             theme: "light",
             transition: Bounce,
           })
-
+          
+          setIsOpen(true)
         } else {
           toast.error(res.employeeDetails.message, {
             position: "top-center",
@@ -62,6 +79,7 @@ const EmployeeForm: React.FC = () => {
   };
 
   return (
+    <>
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label className="block text-sm font-medium text-gray-700">Employee name</label>
@@ -85,7 +103,7 @@ const EmployeeForm: React.FC = () => {
         >
           <option value="">Select</option>
           <option value="Head">Head</option>
-          <option value="Sales">Employee</option>
+          <option value="Employee">Employee</option>
         </select>
       </div>
 
@@ -105,6 +123,10 @@ const EmployeeForm: React.FC = () => {
         Create
       </button>
     </form>
+    <Modal isOpen={isOpen} onClose={closeModal} title=''>
+    <EmployeeCredentialDetails employeeId={employeId} employeePassword={employePassword}/>
+    </Modal>
+    </>
   );
 };
 

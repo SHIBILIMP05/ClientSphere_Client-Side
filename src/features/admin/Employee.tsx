@@ -2,19 +2,19 @@
 import { useState } from "react";
 import EmployeeCard from "./EmployeeCard"
 import EmployeeForm from "./EmployeeForm";
-import Modal from "./Modal";
+import Modal from "../../components/Modal";
 
 
 const Employee = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => {
-    setIsModalOpen(true);
-  };
+    const openModal = () => {
+        setIsModalOpen(true);
+    };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-  };
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
     const employees = [
         {
             name: "Jukkoe Sisa",
@@ -44,7 +44,6 @@ const Employee = () => {
     ];
     return (
         <>
-
             <div className="flex justify-between items-center mt-8 mb-4">
                 <input
                     type="text"
@@ -68,10 +67,10 @@ const Employee = () => {
                     />
                 ))}
             </div>
-             {/* Modal for Creating Employee */}
-        <Modal isOpen={isModalOpen} onClose={closeModal}>
-          <EmployeeForm />
-        </Modal>
+            {/* Modal for Creating Employee */}
+            <Modal isOpen={isModalOpen} onClose={closeModal} title="Create Employee">
+                <EmployeeForm closeModal_1={closeModal} />
+            </Modal>
         </>
     )
 }
