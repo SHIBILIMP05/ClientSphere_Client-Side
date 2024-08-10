@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { adminCreateEmploye } from '../../services/apis/adminApi';
+import { Bounce, toast } from 'react-toastify';
 
 const EmployeeForm: React.FC = () => {
   const [name, setName] = useState('');
@@ -7,16 +8,56 @@ const EmployeeForm: React.FC = () => {
   const [email, setEmail] = useState('');
 
   const handleSubmit = (e: React.FormEvent) => {
-    
+
     e.preventDefault();
     console.log({ name, position, email });
-    const status = adminCreateEmploye({ name, position, email })
-    status.then((res)=>{
-      if(res){
-        
-      }
-    })
+    try {
 
+      const status = adminCreateEmploye({ name, position, email })
+      status.then((res) => {
+        if (res.employeeDetails.status === 200) {
+          console.log('logedin==>', res.employeeDetails);
+          toast.success(res.employeeDetails.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })
+
+        } else {
+          toast.error(res.employeeDetails.message, {
+            position: "top-center",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+            transition: Bounce,
+          })
+        }
+      })
+
+    } catch (error) {
+      console.error('Error creating employee:', error);
+      toast.error('Failed to create employee.', {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+        transition: Bounce,
+      });
+    }
 
   };
 
@@ -43,8 +84,8 @@ const EmployeeForm: React.FC = () => {
           required
         >
           <option value="">Select</option>
-          <option value="Manager">Head</option>
-          <option value="Developer">Employee</option>
+          <option value="Head">Head</option>
+          <option value="Sales">Employee</option>
         </select>
       </div>
 
