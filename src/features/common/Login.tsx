@@ -1,10 +1,10 @@
-import React from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import LoginLayout from "../../components/LoginLayout";
 import { adminLogin } from "../../services/apis/adminApi";
 import { headLogin } from "../../services/apis/headApi";
 import { useNavigate } from "react-router-dom";
+import { employeeLogin } from "../../services/apis/employee";
 
 interface position {
     position: string;
@@ -15,13 +15,13 @@ const Login = ({ position }: position) => {
 
     const validationSchema = Yup.object({
         email: Yup.string()
-        .email("Invalid email format")
-        .required("Email is required")
-        .matches(/^\S.*$/, "Email cannot start with a space"),  
-    password: Yup.string()
-        .min(6, "Password must be at least 6 characters")
-        .required("Password is required")
-        .matches(/^\S.*$/, "Password cannot start with a space"),
+            .email("Invalid email format")
+            .required("Email is required")
+            .matches(/^\S.*$/, "Email cannot start with a space"),
+        password: Yup.string()
+            .min(6, "Password must be at least 6 characters")
+            .required("Password is required")
+            .matches(/^\S.*$/, "Password cannot start with a space"),
     });
 
     const formik = useFormik({
@@ -51,6 +51,18 @@ const Login = ({ position }: position) => {
                         }
                     });
                     break;
+                case "employee":
+                    status = employeeLogin(values);
+                    status.then((data) => {
+                        if (data.employe.status === 200 && data.employe.accessToken) {
+                            localStorage.setItem('employeToken', data.employe.accessToken)
+                            navigate("/employee/dashboard")
+                        }
+                    })
+                    break;
+                default:
+                    console.log("Invalid position passed");
+                        
             }
         },
     });

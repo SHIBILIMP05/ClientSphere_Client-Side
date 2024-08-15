@@ -14,3 +14,8 @@ export interface HeadDetails{
     email:string,
     password:string
 }
+
+export interface EmployeeDetails{
+    email:string,
+    password:string
+}

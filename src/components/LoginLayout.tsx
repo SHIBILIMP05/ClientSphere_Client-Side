@@ -15,7 +15,7 @@ const LoginLayout = ({ children,imgPath }:LoginLayout ) => {
         <h1 className="text-white md:hidden text-3xl font-semibold ">Welcom to our CRM.</h1>
         <h1 className="text-white md:hidden text-2xl font-semibold ">Sign In to see Latest updates</h1>
         <p  className="text-H1 md:hidden font-semibold">Enter your details to proceed further</p>
-        <img className=" max-md:hidden lg:size-[525px] lg:mt-44 xl:mt-40 xl:ml-40 xl:size-[700px]" src={imgPath} alt="" />
+        <img className=" max-md:hidden lg:size-[525px] lg:mt-44 xl:mt-40 xl:ml-40 xl:size-[600px]" src={imgPath} alt="" />
 
       </div>
     </div>

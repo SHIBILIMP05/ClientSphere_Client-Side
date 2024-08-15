@@ -24,7 +24,7 @@ const AdminRouts = ({ position }: Position) => {
         draggable
         pauseOnHover
         theme="light"
-        transition={Bounce} // Corrected syntax
+        transition={Bounce}
       />
       <Routes>
         <Route path="/" element={<AdminLogOutAuth><Login position={position} /></AdminLogOutAuth>} />

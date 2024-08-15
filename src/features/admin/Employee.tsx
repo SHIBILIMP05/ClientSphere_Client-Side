@@ -1,12 +1,14 @@
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EmployeeCard from "./EmployeeCard"
 import EmployeeForm from "./EmployeeForm";
 import Modal from "../../components/Modal";
+import { listEmploye } from "../../services/apis/adminApi";
 
 
 const Employee = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [employeeList,setEmployeeList] = useState([{}]);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -15,33 +17,19 @@ const Employee = () => {
     const closeModal = () => {
         setIsModalOpen(false);
     };
-    const employees = [
-        {
-            name: "Jukkoe Sisa",
-            phone: "+91 8934357834",
-            email: "sibyl_kozey@gmail.com",
-            imageUrl: "/path-to-image2.jpg",
-        },
-        {
-            name: "Jason Price",
-            phone: "+91 8934357834",
-            email: "janick_parisian@yahoo.com",
-            imageUrl: "/path-to-image1.jpg",
-        },
-        {
-            name: "Jukkoe Sisa",
-            phone: "+91 8934357834",
-            email: "sibyl_kozey@gmail.com",
-            imageUrl: "/path-to-image2.jpg",
-        },
-        {
-            name: "Jukkoe Sisa",
-            phone: "+91 8934357834",
-            email: "sibyl_kozey@gmail.com",
-            imageUrl: "/path-to-image2.jpg",
-        }
-        // Add more employee data here
-    ];
+
+    useEffect(()=>{
+        const employeeList = listEmploye()
+        console.log(employeeList);
+        
+        employeeList.then((data)=>{
+            console.log("helloooo",data);
+            setEmployeeList(data.employeList.employeList)
+            
+        })
+    },[])
+
+   
     return (
         <>
             <div className="flex justify-between items-center mt-8 mb-4">
@@ -57,7 +45,7 @@ const Employee = () => {
 
             {/* Employees Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-                {employees.map((employee, index) => (
+                {employeeList.map((employee, index) => (
                     <EmployeeCard
                         key={index}
                         name={employee.name}
