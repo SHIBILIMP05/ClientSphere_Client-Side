@@ -7,11 +7,7 @@ import StatsCard from "../../components/StatusCard"
 const Dashboard = () => {
     return (
         <>
-            {/* Main Content */}
-            <div className="flex-1 ml-56 p-3">
-                {/* Navbar */}
-                {/* <Navbar /> */}
-
+           
                 {/* Stats Cards */}
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 mt-5 ">
                     <StatsCard title="Total Sales" value={1345} icon="fas fa-chart-line" />
@@ -29,7 +25,6 @@ const Dashboard = () => {
                 <div className="mt-4">
                     <EmployeeStatus />
                 </div>
-            </div>
         </>
     )
 }

@@ -18,7 +18,7 @@ const SideBar = (props:SideBarPropInterface) => {
             props.setEmployee(false)
             props.setHead(false)
             props.setMessenger(false)
-            }} className={`flex pl-2  ${props.dashboard?'bg-B3':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px]  items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
+            }} className={`flex pl-2  ${props.dashboard?'bg-B3':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px] drop-shadow-md shadow-md hover:drop-shadow-xl items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
             <SpaceDashboardIcon fontSize="small" />
             <span>Dashboard</span>
           </button>
@@ -30,7 +30,7 @@ const SideBar = (props:SideBarPropInterface) => {
              props.setHead(false)
              props.setMessenger(false)
 
-          }} className={`flex pl-2  ${props.employee?'bg-B3':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px]  items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
+          }} className={`flex pl-2  ${props.employee?'bg-B3':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px] drop-shadow-md shadow-md hover:drop-shadow-xl items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
             <BadgeTwoToneIcon fontSize='small'/>
             <span>Employees</span>
           </button>
@@ -42,7 +42,7 @@ const SideBar = (props:SideBarPropInterface) => {
              props.setHead(true)
              props.setMessenger(false)
 
-          }}className={`flex pl-2  ${props.head?'bg-B3':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px]  items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
+          }}className={`flex pl-2  ${props.head?'bg-B3':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px] drop-shadow-md shadow-md hover:drop-shadow-xl items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
             <AdminPanelSettingsTwoToneIcon fontSize='small' />
             <span>Head </span>
           </button>
@@ -54,7 +54,7 @@ const SideBar = (props:SideBarPropInterface) => {
              props.setHead(false)
              props.setMessenger(true)
 
-          }} className={`flex pl-2  ${props.messenger?'bg-B3':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px]  items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
+          }} className={`flex pl-2  ${props.messenger?'bg-B3':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px] drop-shadow-md shadow-md hover:drop-shadow-xl items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
             <QuestionAnswerIcon fontSize='small'/>
             <span>Messenger</span>
           </button>

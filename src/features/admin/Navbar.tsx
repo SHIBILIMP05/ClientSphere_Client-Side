@@ -28,7 +28,7 @@ const Navbar = (props: dashboardPorpesInterface) => {
         </div>
         <div className="flex items-center space-x-2">
           <img src="/path-to-profile-picture" alt="Admin" className="w-8 h-8 rounded-full" />
-          <div className="text-sm">Moni Roy</div>
+          <div className="text-sm">admin Roy</div>
         </div>
       </div>
     </div>
