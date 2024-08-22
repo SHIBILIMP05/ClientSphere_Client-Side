@@ -7,5 +7,11 @@ export interface dashboardPorpesInterface{
     inbox?:boolean,
     call?:boolean,
     toDo?:boolean,
-    messenger:boolean
+    messenger:boolean,
+    profileInfo:boolean,
+    setProfileInfo:React.Dispatch<React.SetStateAction<boolean>>,
+    setDashboard:React.Dispatch<React.SetStateAction<boolean>>,
+    setEmployee:React.Dispatch<React.SetStateAction<boolean>>,
+    setHead:React.Dispatch<React.SetStateAction<boolean>>,
+    setMessenger:React.Dispatch<React.SetStateAction<boolean>>,
 }

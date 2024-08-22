@@ -2,9 +2,14 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import AdminRouts from "./routers/AdminRouts";
 import HeadRouts from "./routers/HeadRouts";
 import EmployeeRouts from "./routers/EmployeeRouts";
+import { Provider } from "react-redux";
+import { persistor, store } from "./store/store";
+import { PersistGate } from "redux-persist/integration/react";
 
 const App: React.FC = () => {
   return (
+    <Provider store={store}>
+      <PersistGate loading={null} persistor={persistor}>
     <Router>
       <Routes>
         {/* <Route path="/*" element={<AdminRouts />} /> */}
@@ -15,6 +20,8 @@ const App: React.FC = () => {
 
       </Routes>
     </Router>
+    </PersistGate>
+    </Provider>
   );
 };
 

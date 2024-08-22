@@ -5,6 +5,6 @@ export interface HeadSideBarInterface{
     setMessenger:React.Dispatch<React.SetStateAction<boolean>>,
     dashboard:boolean,
     employee:boolean,
-    AllSales:boolean
+    AllSales:boolean,
     messenger:boolean
   }

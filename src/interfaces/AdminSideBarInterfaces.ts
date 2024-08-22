@@ -4,10 +4,12 @@ export interface SideBarPropInterface{
     setEmployee:React.Dispatch<React.SetStateAction<boolean>>,
     setHead:React.Dispatch<React.SetStateAction<boolean>>,
     setMessenger:React.Dispatch<React.SetStateAction<boolean>>,
+    setProfileInfo:React.Dispatch<React.SetStateAction<boolean>>,
     dashboard:boolean,
     employee:boolean,
     head:boolean,
-    messenger:boolean
+    messenger:boolean,
+    profileInfo:boolean,
   }
 
   

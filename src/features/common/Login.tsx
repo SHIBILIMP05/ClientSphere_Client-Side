@@ -5,6 +5,8 @@ import { adminLogin } from "../../services/apis/adminApi";
 import { headLogin } from "../../services/apis/headApi";
 import { useNavigate } from "react-router-dom";
 import { employeeLogin } from "../../services/apis/employee";
+import { useDispatch } from "react-redux";
+import { adminDetails } from "../../store/slice/adminSlice";
 
 interface position {
     position: string;
@@ -12,6 +14,7 @@ interface position {
 
 const Login = ({ position }: position) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const validationSchema = Yup.object({
         email: Yup.string()
@@ -38,6 +41,15 @@ const Login = ({ position }: position) => {
                     status.then((data) => {
                         if (data.admin.status === 200 && data.admin.accessToken) {
                             localStorage.setItem("adminToken", data.admin.accessToken);
+                           
+                            dispatch(adminDetails({
+                                id:data.admin.data._id,
+                                name:data.admin.data.name,
+                                email:data.admin.data.email,
+                                image:data.admin.data.image,
+                            }))
+                           
+                           
                             navigate("/admin/dashboard");
                         }
                     });
@@ -62,7 +74,7 @@ const Login = ({ position }: position) => {
                     break;
                 default:
                     console.log("Invalid position passed");
-                        
+
             }
         },
     });
