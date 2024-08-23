@@ -14,4 +14,5 @@ export interface dashboardPorpesInterface{
     setEmployee:React.Dispatch<React.SetStateAction<boolean>>,
     setHead:React.Dispatch<React.SetStateAction<boolean>>,
     setMessenger:React.Dispatch<React.SetStateAction<boolean>>,
+    setAllSales:React.Dispatch<React.SetStateAction<boolean>>,
 }

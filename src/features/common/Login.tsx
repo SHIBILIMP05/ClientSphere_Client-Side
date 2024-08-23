@@ -4,9 +4,10 @@ import LoginLayout from "../../components/LoginLayout";
 import { adminLogin } from "../../services/apis/adminApi";
 import { headLogin } from "../../services/apis/headApi";
 import { useNavigate } from "react-router-dom";
-import { employeeLogin } from "../../services/apis/employee";
+import { employeeLogin } from "../../services/apis/employeeApi";
 import { useDispatch } from "react-redux";
 import { adminDetails } from "../../store/slice/adminSlice";
+import { headDetails } from "../../store/slice/headSlice";
 
 interface position {
     position: string;
@@ -59,6 +60,14 @@ const Login = ({ position }: position) => {
                     status.then((data) => {
                         if (data.head.status === 200 && data.head.accessToken) {
                             localStorage.setItem("headToken", data.head.accessToken);
+
+                            dispatch(headDetails({
+                                id:data.head.data._id,
+                                name:data.head.data.name,
+                                email:data.head.data.email,
+                                image:data.head.data.image,
+                            }))
+
                             navigate("/head/dashboard");
                         }
                     });

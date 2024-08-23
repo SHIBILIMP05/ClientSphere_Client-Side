@@ -6,7 +6,7 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
-const Navbar = (props: dashboardPorpesInterface) => {
+const Navbar = (props: Omit<dashboardPorpesInterface,'setAllSales'>) => {
   const [title, setTitle] = useState('')
   const [isOpen,setIsOpen] = useState(false)
 
@@ -27,9 +27,7 @@ const Navbar = (props: dashboardPorpesInterface) => {
     }
   }, [props.dashboard, props.employee, props.head, props.messenger,props.profileInfo]);
 
-  const handleAccount =()=>{
 
-  }
   
   return (
     <div className="bg-B4 flex justify-between items-center p-4 shadow-md ">
