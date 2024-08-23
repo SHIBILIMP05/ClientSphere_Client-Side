@@ -3,11 +3,13 @@ import adminSlice from "./slice/adminSlice";
 import { persistReducer, persistStore } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import headSlice from "./slice/headSlice";
+import employeeSlice from "./slice/employeeSlice";
 
 
 const rootReducer = combineReducers({
     Admin: adminSlice,
-    Head:headSlice
+    Head:headSlice,
+    Employe:employeeSlice
 })
 
 const persistConfig = {

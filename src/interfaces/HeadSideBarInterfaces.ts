@@ -3,8 +3,11 @@ export interface HeadSideBarInterface{
     setEmployee:React.Dispatch<React.SetStateAction<boolean>>,
     setAllSales:React.Dispatch<React.SetStateAction<boolean>>,
     setMessenger:React.Dispatch<React.SetStateAction<boolean>>,
+    setProfileInfo:React.Dispatch<React.SetStateAction<boolean>>,
     dashboard:boolean,
     employee:boolean,
     AllSales:boolean,
-    messenger:boolean
+    messenger:boolean,
+    profileInfo:boolean,
+
   }

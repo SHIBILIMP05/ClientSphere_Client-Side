@@ -6,7 +6,7 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 
-const Navbar = (props: Omit<dashboardPorpesInterface,'setAllSales'>) => {
+const Navbar = (props: Omit<dashboardPorpesInterface,'setAllSales'|'setLeads'| 'setInbox'| 'setCall'| 'setToDo'>) => {
   const [title, setTitle] = useState('')
   const [isOpen,setIsOpen] = useState(false)
 

@@ -8,6 +8,7 @@ import { employeeLogin } from "../../services/apis/employeeApi";
 import { useDispatch } from "react-redux";
 import { adminDetails } from "../../store/slice/adminSlice";
 import { headDetails } from "../../store/slice/headSlice";
+import { employeDetails } from "../../store/slice/employeeSlice";
 
 interface position {
     position: string;
@@ -60,7 +61,8 @@ const Login = ({ position }: position) => {
                     status.then((data) => {
                         if (data.head.status === 200 && data.head.accessToken) {
                             localStorage.setItem("headToken", data.head.accessToken);
-
+                            console.log('logindata=====:::',data);
+                            
                             dispatch(headDetails({
                                 id:data.head.data._id,
                                 name:data.head.data.name,
@@ -77,6 +79,14 @@ const Login = ({ position }: position) => {
                     status.then((data) => {
                         if (data.employe.status === 200 && data.employe.accessToken) {
                             localStorage.setItem('employeToken', data.employe.accessToken)
+                            
+                            dispatch(employeDetails({
+                                id:data.employe.data._id,
+                                name:data.employe.data.name,
+                                email:data.employe.data.email,
+                                image:data.employe.data.image,
+                            }))
+
                             navigate("/employee/dashboard")
                         }
                     })

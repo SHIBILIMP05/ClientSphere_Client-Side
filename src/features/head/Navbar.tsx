@@ -6,7 +6,7 @@ import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { RootState } from '../../store/store';
 import { useSelector } from 'react-redux';
 
-const Navbar = (props: Omit<dashboardPorpesInterface,'setHead'>) => {
+const Navbar = (props: Omit<dashboardPorpesInterface,'setHead'|'setLeads'| 'setInbox'| 'setCall'| 'setToDo'>) => {
     const [title, setTitle] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 

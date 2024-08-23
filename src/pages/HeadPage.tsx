@@ -14,7 +14,7 @@ const HeadPage = () => {
   return (
     <div className="flex min-h-screen bg-B4">
       {/* Sidebar */}
-      <SideBar dashboard={dashboard} setDashboard={setDashboard} employee={employee} setEmployee={setEmployee} AllSales={AllSales} setAllSales={setAllSales} messenger={messenger} setMessenger={setMessenger} />
+      <SideBar dashboard={dashboard} setDashboard={setDashboard} employee={employee} setEmployee={setEmployee} AllSales={AllSales} setAllSales={setAllSales} messenger={messenger} setMessenger={setMessenger} profileInfo={profileInfo} setProfileInfo={setProfileInfo} />
 
       {/* Main Content */}
       <div className="flex-1 ml-56 p-3">

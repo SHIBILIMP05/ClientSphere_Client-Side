@@ -17,6 +17,7 @@ const SideBar = (props:HeadSideBarInterface) => {
             props.setEmployee(false)
             props.setAllSales(false)
             props.setMessenger(false)
+            props.setProfileInfo(false)
             }} className={`flex pl-2  ${props.dashboard?'bg-B3 drop-shadow-xl':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px] drop-shadow-md shadow-md hover:drop-shadow-xl items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
             <SpaceDashboardIcon fontSize="small" />
             <span>Dashboard</span>
@@ -28,6 +29,7 @@ const SideBar = (props:HeadSideBarInterface) => {
             props.setEmployee(true)
             props.setAllSales(false)
             props.setMessenger(false)
+            props.setProfileInfo(false)
 
           }} className={`flex pl-2  ${props.employee?'bg-B3 drop-shadow-xl':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px] drop-shadow-md shadow-md hover:drop-shadow-xl items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
             <BadgeTwoToneIcon fontSize='small'/>
@@ -40,6 +42,7 @@ const SideBar = (props:HeadSideBarInterface) => {
             props.setEmployee(false)
             props.setAllSales(true)
             props.setMessenger(false)
+            props.setProfileInfo(false)
 
           }} className={`flex pl-2  ${props.AllSales?'bg-B3 drop-shadow-xl':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px] drop-shadow-md shadow-md hover:drop-shadow-xl items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
             <TrendingUpRoundedIcon fontSize='small'/>
@@ -52,6 +55,7 @@ const SideBar = (props:HeadSideBarInterface) => {
             props.setEmployee(false)
             props.setAllSales(false)
             props.setMessenger(true)
+            props.setProfileInfo(false)
 
           }} className={`flex pl-2  ${props.messenger?'bg-B3 drop-shadow-xl':'bg-B2'} hover:bg-B3 w-[193.99px] h-[37px] drop-shadow-md shadow-md hover:drop-shadow-xl items-center space-x-2 text-white font-bold text-TS1 rounded-R3 transition-colors duration-500 ease-linear`}>
             <QuestionAnswerIcon fontSize='small'/>
