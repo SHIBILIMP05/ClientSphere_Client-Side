@@ -52,7 +52,7 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
         const data = new FormData()
         data.append("_id", id)
         data.append("name", name)
-        data.append("emil", email)
+        data.append("email", email)
         data.append("address", address)
         data.append("city", city)
         data.append("country", country)
