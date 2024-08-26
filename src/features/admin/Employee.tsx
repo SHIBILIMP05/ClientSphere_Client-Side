@@ -9,7 +9,7 @@ interface Employees{
     name:string
     email:string
     phone:string
-    imageUrl:string
+    image:string
     _id:string
     is_restricted:boolean
 }
@@ -61,7 +61,7 @@ const Employee = () => {
                         name={employee.name}
                         phone={employee.phone}
                         email={employee.email}
-                        imageUrl={employee.imageUrl}
+                        imageUrl={employee.image}
                         id={employee._id}
                         is_restricted={employee.is_restricted}
                         is_block={is_block}

@@ -7,6 +7,7 @@ import * as Yup from 'yup';
 import { ProfileDetails } from '../../interfaces/AdminProfileInterfaces';
 import { employeDetails } from '../../store/slice/employeeSlice';
 import { editProfile } from '../../services/apis/employeeApi';
+import { Bounce, toast } from 'react-toastify';
 
 interface Props {
     setIsEdit: React.Dispatch<React.SetStateAction<boolean>>;
@@ -41,8 +42,8 @@ const ProfileForm = (props: Props) => {
         try {
             const status = editProfile(values, employe.id)
             status.then((data) => {
-                console.log("data-updated===>", data);
-    
+                console.log("data-updated===>", data.message);
+
                 if (data.editProfileResponse.status === 200) {
                     dispatch(employeDetails({
                         id: data.editProfileResponse.data._id,
@@ -54,15 +55,38 @@ const ProfileForm = (props: Props) => {
                         address: data.editProfileResponse.data.address,
                         city: data.editProfileResponse.data.city,
                         pinCode: data.editProfileResponse.data.pinCode,
-    
+
                     }))
+                    toast.success(data.editProfileResponse.message, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce,
+                    });
+                } else if (data.message == "Your actions Restricted by admin.") {
+                    toast.success(data.message, {
+                        position: "top-center",
+                        autoClose: 5000,
+                        hideProgressBar: true,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                        progress: undefined,
+                        theme: "light",
+                        transition: Bounce,
+                    });
                 }
             })
         } catch (error) {
-            console.error("Failed to update profile:",error);
-            
+            console.error("Failed to update profile:", error);
+
         }
-       
+
     };
 
     return (

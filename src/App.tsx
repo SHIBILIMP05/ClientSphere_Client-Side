@@ -5,6 +5,7 @@ import EmployeeRouts from "./routers/EmployeeRouts";
 import { Provider } from "react-redux";
 import { persistor, store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
+import HomePage from "./pages/HomePage";
 
 const App: React.FC = () => {
   return (
@@ -12,7 +13,7 @@ const App: React.FC = () => {
       <PersistGate loading={null} persistor={persistor}>
     <Router>
       <Routes>
-        {/* <Route path="/*" element={<AdminRouts />} /> */}
+        <Route path="/*" element={<HomePage/>} />
         
         <Route path="/admin/*" element={<AdminRouts position={"admin"} />} />
         <Route path="/head/*" element={<HeadRouts position={"head"}/>} />

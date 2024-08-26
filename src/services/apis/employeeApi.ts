@@ -41,8 +41,8 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
         };
         console.log("hello i landed");
 
-        const response = await instance.post('/api/employee/editProfile', data, config)
-        console.log("read response", response.data);
+        const response = await instance.post(`/api/employee/${id}/editProfile`, data, config)
+        console.log("read response=====>", response.data);
 
         return response.data
 
