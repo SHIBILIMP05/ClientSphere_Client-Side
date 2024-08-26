@@ -84,7 +84,7 @@ const ProfileForm = (props: Props) => {
                                 />
                             ) : (
                                 <img
-                                    src={`https://ui-avatars.com/api/?name=${employe.name}}`}
+                                    src={`https://ui-avatars.com/api/?name=${employe.name}`}
                                     alt="Profile"
                                     className="w-20 h-20 rounded-full object-cover relative border-[#6735CC] border-4"
                                 />

@@ -5,10 +5,20 @@ import EmployeeForm from "./EmployeeForm";
 import Modal from "../../components/Modal";
 import { listEmploye } from "../../services/apis/adminApi";
 
+interface Employees{
+    name:string
+    email:string
+    phone:string
+    imageUrl:string
+    _id:string
+    is_restricted:boolean
+}
 
 const Employee = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [employeeList,setEmployeeList] = useState([{}]);
+    const [employeeList,setEmployeeList] = useState<Employees[]>([])
+    const [is_block,setIs_block]= useState(false)
+    
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -20,14 +30,14 @@ const Employee = () => {
 
     useEffect(()=>{
         const employeeList = listEmploye()
-        console.log(employeeList);
+        console.log(employeeList); 
         
         employeeList.then((data)=>{
             console.log("helloooo",data);
             setEmployeeList(data.employeList.employeList)
             
         })
-    },[])
+    },[is_block,isModalOpen])
 
    
     return (
@@ -52,6 +62,10 @@ const Employee = () => {
                         phone={employee.phone}
                         email={employee.email}
                         imageUrl={employee.imageUrl}
+                        id={employee._id}
+                        is_restricted={employee.is_restricted}
+                        is_block={is_block}
+                        setIs_block={setIs_block}
                     />
                 ))}
             </div>

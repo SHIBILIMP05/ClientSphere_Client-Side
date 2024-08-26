@@ -38,7 +38,7 @@ const Navbar = (props: Omit<dashboardPorpesInterface,'setHead'|'setLeads'| 'setI
                     <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full"></span>
                 </div>
                 <div className="flex items-center space-x-2">
-                    {head.image ? <img src={head.image} className="w-8 h-8 rounded-full border-[#6735CC] border-2" /> : <img src={`https://ui-avatars.com/api/?name=${head.name}&background=random}`} className="w-8 h-8 rounded-full border-[#6735CC] border-2" />}
+                    {head.image ? <img src={head.image} className="w-8 h-8 rounded-full border-[#6735CC] border-2" /> : <img src={`https://ui-avatars.com/api/?name=${head.name}&background=random`} className="w-8 h-8 rounded-full border-[#6735CC] border-2" />}
                     <div className="text-sm">{head.name}</div>
                 </div>
             </div>

@@ -18,7 +18,7 @@ const ProfileInfo = (props: Props) => {
             alt="Profile"
             className="w-20 h-20 rounded-full object-cover  border-[#6735CC] border-4"
           />) : (<img
-            src={`https://ui-avatars.com/api/?name=${employe.name}}`} // Replace with actual image path
+            src={`https://ui-avatars.com/api/?name=${employe.name}`} // Replace with actual image path
             alt="Profile"
             className="w-20 h-20 rounded-full object-cover  border-[#6735CC] border-4"
           />)

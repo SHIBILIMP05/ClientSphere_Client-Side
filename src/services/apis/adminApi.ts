@@ -46,6 +46,16 @@ export const listEmploye = async () => {
     }
 }
 
+export const blockEmploye = async (id: string)=> {
+    try {
+        const response = await instance.get(`/api/auth/employe/${id}/block`)
+        console.log(response.data)
+        return response.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
 export const editProfile = async ({ name, email, phone, address, city, country, pinCode, image }: ProfileDetails, id: string) => {
     try {
 
@@ -72,10 +82,10 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
             withCredentials: true,
         };
         console.log("hello i landed");
-        
+
         const response = await instance.post('/api/admin/editProfile', data, config)
-        console.log("read response",response.data);
-        
+        console.log("read response", response.data);
+
         return response.data
 
     } catch (error) {
