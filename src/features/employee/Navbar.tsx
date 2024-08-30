@@ -4,14 +4,17 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { RootState } from '../../store/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { employeDetails } from '../../store/slice/employeeSlice';
+import { useNavigate } from 'react-router-dom';
 
-const Navbar = (props: Omit<dashboardPorpesInterface,"setAllSales"|"setHead"|"setEmployee">) => {
+const Navbar = (props: Omit<dashboardPorpesInterface, "setAllSales" | "setHead" | "setEmployee">) => {
     const [title, setTitle] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
-  const employe = useSelector((state:RootState)=>state.Employe)
-
+    const employe = useSelector((state: RootState) => state.Employe)
+    const dispatch = useDispatch()
+    const navigate = useNavigate()
 
     useEffect(() => {
         if (props.dashboard) {
@@ -30,6 +33,24 @@ const Navbar = (props: Omit<dashboardPorpesInterface,"setAllSales"|"setHead"|"se
             setTitle('Profile Info');
         }
     }, [props.dashboard, props.leads, props.inbox, props.call, props.toDo, props.messenger, props.profileInfo]);
+
+    const handleLogOut = () => {
+        dispatch(
+            employeDetails({
+                id: '',
+                name: '',
+                email: '',
+                image: '',
+                phone: '',
+                country: '',
+                address: '',
+                city: '',
+                pinCode: '',
+            })
+        );
+        localStorage.removeItem("employeToken");
+        navigate('/employee/login')
+    };
 
     return (
         <div className="bg-B4 flex justify-between items-center p-4 shadow-md ">
@@ -58,13 +79,13 @@ const Navbar = (props: Omit<dashboardPorpesInterface,"setAllSales"|"setHead"|"se
                         props.setToDo(false)
                         props.setProfileInfo(true)
 
-                    }} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    }} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                         <AccountCircleRoundedIcon fontSize='small' color='primary' /> Manage Account
                     </h1>
-                    <h1 className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <h1 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                         <LockResetRoundedIcon fontSize='small' color='warning' /> Change Password
                     </h1>
-                    <h1 className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <h1 onClick={handleLogOut} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                         <LogoutRoundedIcon fontSize='small' color='error' /> Log out
                     </h1>
                 </div>

@@ -29,8 +29,6 @@ const employeSlice = createSlice({
     initialState,
     reducers: {
         employeDetails: (state, action) => {
-            console.log("type: ", action.type);
-            console.log("payload: ", action.payload);
             state.id = action.payload.id
             state.name = action.payload.name
             state.email = action.payload.email

@@ -42,7 +42,8 @@ const ProfileForm = (props: Props) => {
         try {
             const status = editProfile(values, employe.id)
             status.then((data) => {
-                console.log("data-updated===>", data.message);
+                console.log("data-updated===>", data);
+
 
                 if (data.editProfileResponse.status === 200) {
                     dispatch(employeDetails({
@@ -58,18 +59,6 @@ const ProfileForm = (props: Props) => {
 
                     }))
                     toast.success(data.editProfileResponse.message, {
-                        position: "top-center",
-                        autoClose: 5000,
-                        hideProgressBar: true,
-                        closeOnClick: true,
-                        pauseOnHover: true,
-                        draggable: true,
-                        progress: undefined,
-                        theme: "light",
-                        transition: Bounce,
-                    });
-                } else if (data.message == "Your actions Restricted by admin.") {
-                    toast.success(data.message, {
                         position: "top-center",
                         autoClose: 5000,
                         hideProgressBar: true,

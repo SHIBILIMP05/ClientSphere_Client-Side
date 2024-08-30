@@ -1,18 +1,15 @@
-import axios from "axios";
 import { AdminDetails } from "../../interfaces/LogInterface";
 import { EmployeeDetails } from "../../interfaces/AdminEmployeeInterfaces";
 import { ProfileDetails } from "../../interfaces/AdminProfileInterfaces";
+import adminInstance from "./axios_instences/admin_instance";
 
 
-const instance = axios.create({
-    baseURL: 'http://localhost:5000'
-})
 
 export const adminLogin = async (data: AdminDetails) => {
     try {
 
         console.log("before", data);
-        const response = await instance.post('/api/auth/admin/login', data)
+        const response = await adminInstance.post('/api/auth/admin/login', data)
         console.log("rsponse in client-side::", response);
         return response.data
     } catch (error) {
@@ -24,7 +21,7 @@ export const adminLogin = async (data: AdminDetails) => {
 
 export const adminCreateEmploye = async (employeeDetails: EmployeeDetails) => {
     try {
-        const response = await instance.post('/api/admin/createEmployee', employeeDetails)
+        const response = await adminInstance.post('/api/admin/createEmployee', employeeDetails)
         console.log("createEmploye-Response:", response);
         return response.data
 
@@ -36,7 +33,7 @@ export const adminCreateEmploye = async (employeeDetails: EmployeeDetails) => {
 
 export const listEmploye = async () => {
     try {
-        const response = await instance.get('/api/admin/listEmployee')
+        const response = await adminInstance.get('/api/admin/listEmployee')
         console.log("EmployeesList => ", response);
         return response.data
 
@@ -48,7 +45,7 @@ export const listEmploye = async () => {
 
 export const blockEmploye = async (id: string)=> {
     try {
-        const response = await instance.get(`/api/auth/employe/${id}/block`)
+        const response = await adminInstance.get(`/api/auth/employe/${id}/block`)
         console.log(response.data)
         return response.data
     } catch (error) {
@@ -83,7 +80,7 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
         };
         console.log("hello i landed");
 
-        const response = await instance.post('/api/admin/editProfile', data, config)
+        const response = await adminInstance.post('/api/admin/editProfile', data, config)
         console.log("read response", response.data);
 
         return response.data

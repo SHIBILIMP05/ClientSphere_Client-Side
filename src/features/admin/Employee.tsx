@@ -46,7 +46,7 @@ const Employee = () => {
                 <input
                     type="text"
                     placeholder="Search"
-                    className="border border-gray-300 rounded-lg p-2"
+                    className="border border-gray-300 rounded-xl py-2 px-4"
                 />
                 <button onClick={openModal} className="bg-purple-500 hover:bg-purple-600 text-white py-2 px-4 rounded-lg transition-colors duration-300 ease-in-out">
                     Create Employee +

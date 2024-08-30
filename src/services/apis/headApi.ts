@@ -1,14 +1,12 @@
-import axios from "axios";
 import { HeadDetails } from "../../interfaces/LogInterface";
 import { ProfileDetails } from "../../interfaces/AdminProfileInterfaces";
+import headInstance from "./axios_instences/head_instance";
 
-const instance = axios.create({
-    baseURL: 'http://localhost:5000'
-})
+
 
 
 export const headLogin = async (data: HeadDetails) => {
-    const response = await instance.post('/api/auth/head/login', data)
+    const response = await headInstance.post('/api/auth/head/login', data)
     console.log("head response ===>", response);
 
     return response.data
@@ -41,7 +39,7 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
         };
         console.log("hello i landed");
 
-        const response = await instance.post('/api/head/editProfile', data, config)
+        const response = await headInstance.post('/api/head/editProfile', data, config)
         console.log("read response", response.data);
 
         return response.data

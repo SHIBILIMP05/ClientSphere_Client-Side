@@ -43,15 +43,20 @@ const Login = ({ position }: position) => {
                     status.then((data) => {
                         if (data.admin.status === 200 && data.admin.accessToken) {
                             localStorage.setItem("adminToken", data.admin.accessToken);
-                           
+
                             dispatch(adminDetails({
-                                id:data.admin.data._id,
-                                name:data.admin.data.name,
-                                email:data.admin.data.email,
-                                image:data.admin.data.image,
+                                id: data.admin.data._id,
+                                name: data.admin.data.name,
+                                email: data.admin.data.email,
+                                image: data.admin.data.image,
+                                phone: data.admin.data.phone,
+                                country: data.admin.data.country,
+                                address: data.admin.data.address,
+                                city: data.admin.data.city,
+                                pinCode: data.admin.data.pinCode,
                             }))
-                           
-                           
+
+
                             navigate("/admin/dashboard");
                         }
                     });
@@ -61,13 +66,18 @@ const Login = ({ position }: position) => {
                     status.then((data) => {
                         if (data.head.status === 200 && data.head.accessToken) {
                             localStorage.setItem("headToken", data.head.accessToken);
-                            console.log('logindata=====:::',data);
-                            
+                            console.log('logindata=====:::', data);
+
                             dispatch(headDetails({
-                                id:data.head.data._id,
-                                name:data.head.data.name,
-                                email:data.head.data.email,
-                                image:data.head.data.image,
+                                id: data.head.data._id,
+                                name: data.head.data.name,
+                                email: data.head.data.email,
+                                image: data.head.data.image,
+                                phone: data.head.data.phone,
+                                country: data.head.data.country,
+                                address: data.head.data.address,
+                                city: data.head.data.city,
+                                pinCode: data.head.data.pinCode,
                             }))
 
                             navigate("/head/dashboard");
@@ -79,12 +89,17 @@ const Login = ({ position }: position) => {
                     status.then((data) => {
                         if (data.employe.status === 200 && data.employe.accessToken) {
                             localStorage.setItem('employeToken', data.employe.accessToken)
-                            
+
                             dispatch(employeDetails({
-                                id:data.employe.data._id,
-                                name:data.employe.data.name,
-                                email:data.employe.data.email,
-                                image:data.employe.data.image,
+                                id: data.employe.data._id,
+                                name: data.employe.data.name,
+                                email: data.employe.data.email,
+                                image: data.employe.data.image,
+                                phone: data.employe.data.phone,
+                                country: data.employe.data.country,
+                                address: data.employe.data.address,
+                                city: data.employe.data.city,
+                                pinCode: data.employe.data.pinCode,
                             }))
 
                             navigate("/employee/dashboard")
@@ -100,21 +115,21 @@ const Login = ({ position }: position) => {
 
     return (
         <>
-            <LoginLayout imgPath={"/src/assets/Group 239222.png"}>
-                <form onSubmit={formik.handleSubmit}>
-                    <div>
-                        <div className="max-lg:hidden lg:flex lg:flex-col lg:pt-28 xl:pt-40">
-                            <h1 className="text-B1 xl:text-5xl text-3xl font-semibold ">
+            <LoginLayout imgPath={"/assets/Group 239222.png"}>
+                <form onSubmit={formik.handleSubmit} className="md:flex flex-col  justify-evenly md:h-auto h-full md:py-0 md:px-0 py-28 px-12 ">
+                    
+                        <div className="hidden md:flex md:flex-col ">
+                            <h1 className="text-B1 md:text-4xl  font-bold ">
                                 Welcome to our CRM.
                             </h1>
-                            <h1 className="text-B1 xl:text-4xl text-2xl font-semibold ">
+                            <h2 className="text-B1 md:text-2xl  font-semibold ">
                                 Sign In to see Latest updates
-                            </h1>
-                            <p className="text-H1 xl:text-xl font-semibold">
+                            </h2>
+                            <p className="text-H1  font-medium">
                                 Enter your details to proceed further
                             </p>
                         </div>
-                        <div className="max-md:mt-8 lg:absolute xl:top-96 lg:top-80 flex flex-col">
+                        <div className=" flex flex-col ">
                             <label className="text-H1 max-md:mt-4" htmlFor="email">
                                 Email or ID
                             </label>
@@ -125,7 +140,7 @@ const Login = ({ position }: position) => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.email}
-                                className="border-H1 max-md:w-60 xl:w-96 lg:w-64 lg:h-11 max-md:h-11 border-solid outline-none caret-purple-400 border-b-2 rounded-none"
+                                className="border-H1  lg:h-11 max-md:h-11 border-solid outline-none caret-purple-400 border-b-2 rounded-none"
                             />
                             {formik.touched.email && formik.errors.email ? (
                                 <div className="text-red-500">{formik.errors.email}</div>
@@ -141,23 +156,24 @@ const Login = ({ position }: position) => {
                                 onChange={formik.handleChange}
                                 onBlur={formik.handleBlur}
                                 value={formik.values.password}
-                                className="border-H1 max-md:w-60 xl:w-96 lg:w-64 lg:h-11 max-md:h-11 border-solid outline-none caret-purple-400 border-b-2 rounded-none"
+                                className="border-H1  lg:h-11 max-md:h-11 border-solid outline-none caret-purple-400 border-b-2 rounded-none"
                             />
                             {formik.touched.password && formik.errors.password ? (
                                 <div className="text-red-500">{formik.errors.password}</div>
                             ) : null}
 
-                            <p className="max-md:ml-24 max-md:font-bold xl:ml-[247px] max-md:mt-7 lg:ml-32 lg:mt-9 lg:font-bold text-B1">
+                            <p className="text-end my-3 font-bold text-B1">
                                 Recover password
                             </p>
                             <button
                                 type="submit"
-                                className="bg-B1 max-md:w-36 lg:w-36 lg:h-10 rounded-R3 max-md:h-9 max-md:mt-12 lg:mt-12 text-white font-bold"
+                                className="bg-B1 w-36  md:h-10 rounded-R3 h-9 md:mt-4
+                                mt-2 text-white font-bold"
                             >
                                 Sign In
                             </button>
                         </div>
-                    </div>
+                    
                 </form>
             </LoginLayout>
         </>

@@ -1,14 +1,12 @@
-import axios from "axios";
 import { EmployeeDetails } from "../../interfaces/LogInterface";
 import { ProfileDetails } from "../../interfaces/AdminProfileInterfaces";
+import employeInstance from "./axios_instences/employe_instance.tsx";
 
 
-const instance = axios.create({
-    baseURL: 'http://localhost:5000'
-})
+
 
 export const employeeLogin = async (data: EmployeeDetails) => {
-    const response = await instance.post('api/auth/employe/login', data)
+    const response = await employeInstance.post('api/auth/employe/login', data)
     console.log("employee response ===>", response);
     return response.data
 
@@ -41,10 +39,11 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
         };
         console.log("hello i landed");
 
-        const response = await instance.post(`/api/employee/${id}/editProfile`, data, config)
-        console.log("read response=====>", response.data);
-
-        return response.data
+        const response = await employeInstance.post(`/api/employee/${id}/editProfile`, data, config)
+        
+            console.log("read response=====>", response.data);            
+            return response.data
+        
 
     } catch (error) {
         console.error(error);

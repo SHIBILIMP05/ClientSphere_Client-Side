@@ -4,14 +4,17 @@ import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { RootState } from '../../store/store';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { headDetails } from '../../store/slice/headSlice';
 
 const Navbar = (props: Omit<dashboardPorpesInterface,'setHead'|'setLeads'| 'setInbox'| 'setCall'| 'setToDo'>) => {
     const [title, setTitle] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
   const head = useSelector((state:RootState)=>state.Head)
-
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
 
     useEffect(() => {
         if (props.dashboard) {
@@ -26,6 +29,25 @@ const Navbar = (props: Omit<dashboardPorpesInterface,'setHead'|'setLeads'| 'setI
             setTitle('Profile Info');
         }
     }, [props.dashboard, props.employee, props.AllSales, props.messenger, props.profileInfo]);
+
+
+    const handleLogOut = () => {
+        dispatch(
+            headDetails({
+                id: '',
+                name: '',
+                email: '',
+                image: '',
+                phone: '',
+                country: '',
+                address:'',
+                city: '',
+                pinCode: '',
+            })
+        );
+        localStorage.removeItem("headToken");
+        navigate('/head/login')
+    };
 
     return (
         <div className="bg-B4 flex justify-between items-center p-4 shadow-md ">
@@ -52,13 +74,13 @@ const Navbar = (props: Omit<dashboardPorpesInterface,'setHead'|'setLeads'| 'setI
                         props.setAllSales(false)
                         props.setMessenger(false)
 
-                    }} className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    }} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer ">
                         <AccountCircleRoundedIcon fontSize='small' color='primary' /> Manage Account
                     </h1>
-                    <h1 className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <h1 className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                         <LockResetRoundedIcon fontSize='small' color='warning' /> Change Password
                     </h1>
-                    <h1 className="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                    <h1 onClick={handleLogOut} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                         <LogoutRoundedIcon fontSize='small' color='error' /> Log out
                     </h1>
                 </div>
