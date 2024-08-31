@@ -13,12 +13,12 @@ const AdminPage = () => {
   const [profileInfo,setProfileInfo] = useState(false)
   return (
     //  <InnerLayout/>
-    <div className="flex min-h-screen bg-B4">
+    <div className="flex min-h-screen bg-B4 ">
       {/* Sidebar */}
       <SideBar dashboard={dashboard} setDashboard={setDashboard} employee={employee} setEmployee={setEmployee} head={head} setHead={setHead} messenger={messenger} setMessenger={setMessenger} profileInfo={profileInfo} setProfileInfo={setProfileInfo} />
 
       {/* Main Content */}
-      <div className="flex-1 ml-56 p-3">
+      <div className="flex-1 ml-56 px-2 ">
         {/* Navbar */}
         <Navbar dashboard={dashboard} setDashboard={setDashboard} employee={employee} setEmployee={setEmployee} head={head} setHead={setHead} messenger={messenger} setMessenger={setMessenger} profileInfo={profileInfo} setProfileInfo={setProfileInfo} />
 

@@ -31,12 +31,12 @@ export const adminCreateEmploye = async (employeeDetails: EmployeeDetails) => {
     }
 }
 
-export const listEmploye = async () => {
+export const listEmploye = async (page:number) => {
     try {
-        const response = await adminInstance.get('/api/admin/listEmployee')
+        console.log("pagenumber",page);
+        const response = await adminInstance.get(`/api/admin/listEmployee/${page}`)
         console.log("EmployeesList => ", response);
         return response.data
-
     } catch (error) {
         console.error(error);
 
