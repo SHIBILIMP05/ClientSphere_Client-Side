@@ -38,7 +38,8 @@ const adminSlice = createSlice({
             state.address = action.payload.address
             state.city = action.payload.city
             state.pinCode = action.payload.pinCode
-        }
+        },
+        
     }
 
 })

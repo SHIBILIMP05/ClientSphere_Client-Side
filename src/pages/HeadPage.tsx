@@ -3,6 +3,7 @@ import SideBar from "../features/head/SideBar"
 import Dashboard from "../features/head/Dashboard"
 import Navbar from "../features/head/Navbar"
 import Profile from "../features/head/Profile"
+import SalesAndLeads from "../features/head/SalesAndLeads"
 
 
 const HeadPage = () => {
@@ -23,6 +24,7 @@ const HeadPage = () => {
 
         {dashboard && <Dashboard />}
         {profileInfo&&<Profile/>}
+        {AllSales&&<SalesAndLeads/>}
 
       </div>
     </div>

@@ -9,7 +9,7 @@ import { SideBarPropInterface } from '../../interfaces/AdminSideBarInterfaces';
 const SideBar = (props:SideBarPropInterface) => {
 
   return (
-    <div className="bg-B1 h-full w-[222px] flex flex-col py-9 items-center fixed">
+    <div className="bg-B1 h-full w-[222px] flex flex-col py-9 items-center fixed max-md:hidden">
       <div className="text-white text-2xl font-bold mb-9">ClientSphere</div>
       <ul className="space-y-4">
         <li>

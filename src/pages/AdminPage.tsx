@@ -18,7 +18,7 @@ const AdminPage = () => {
       <SideBar dashboard={dashboard} setDashboard={setDashboard} employee={employee} setEmployee={setEmployee} head={head} setHead={setHead} messenger={messenger} setMessenger={setMessenger} profileInfo={profileInfo} setProfileInfo={setProfileInfo} />
 
       {/* Main Content */}
-      <div className="flex-1 ml-56 px-2 ">
+      <div className="flex-1 md:ml-56 px-2  ">
         {/* Navbar */}
         <Navbar dashboard={dashboard} setDashboard={setDashboard} employee={employee} setEmployee={setEmployee} head={head} setHead={setHead} messenger={messenger} setMessenger={setMessenger} profileInfo={profileInfo} setProfileInfo={setProfileInfo} />
 
