@@ -92,7 +92,7 @@ const SalesList = (props: Props) => {
                 <button onClick={() => props.setIsLeadsSection(true)} className="bg-purple-500 hover:bg-purple-600 text-white py-2  px-4 rounded-lg">
                     Manage Leads
                     <span className='ml-3'>
-                        <ArrowForwardIcon />
+                        <ArrowForwardIcon/>
                     </span>
                 </button>
             </div>

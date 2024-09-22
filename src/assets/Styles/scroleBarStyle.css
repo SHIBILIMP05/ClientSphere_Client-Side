@@ -1,0 +1,32 @@
+/* Custom scrollbar for WebKit browsers */
+::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #f0f0f0;
+    border-radius: 10px;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: #a593f2;
+    border-radius: 10px;
+    border: 2px solid transparent; /* Padding around thumb */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #866be8;
+  }
+  
+  ::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+  
+  /* Scrollbar for Firefox (works with limited styling) */
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: #eae9e9 #ffffff;
+    border-radius: 10px;
+  }
+  

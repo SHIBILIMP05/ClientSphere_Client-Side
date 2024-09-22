@@ -21,7 +21,7 @@ const HeadRouts = ({position}:position) => {
         draggable
         pauseOnHover
         theme="light"
-        transition={Bounce} // Corrected syntax
+        transition={Bounce} 
       />
       <Routes>
           <Route path="/" element={<HeadLogOutAuth><Login position={position} /></HeadLogOutAuth>} />

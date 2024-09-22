@@ -1,5 +1,4 @@
 import { useState } from "react"
-import ProfileForm from "../employee/ProfileForm"
 import SalesList from "./SalesList"
 import Leads from "./Leads"
 

@@ -21,7 +21,7 @@ const EmployeeRouts = ({position}:position) => {
         draggable
         pauseOnHover
         theme="light"
-        transition={Bounce} // Corrected syntax
+        transition={Bounce} 
       />
       <Routes>
           <Route path="/" element={<EmployeeLogOutAuth><Login position={position} /></EmployeeLogOutAuth>} />

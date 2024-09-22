@@ -4,11 +4,11 @@ import { Bounce, toast } from 'react-toastify';
 
 interface EmployeeCardProps {
   name: string;
-  phone: string;
+  phone?: string;
   email: string;
-  imageUrl: string;
-  id: string;
-  is_restricted:boolean
+  imageUrl?: string;
+  id?: string;
+  is_restricted?:boolean
   is_block: boolean
   setIs_block: React.Dispatch<React.SetStateAction<boolean>>,
 }
@@ -59,11 +59,11 @@ const EmployeeCard: React.FC<EmployeeCardProps> = ({ name, phone, email, imageUr
       <div className="text-sm text-gray-500">{email}</div>
       </div>
       {!is_restricted ? (
-        <button onClick={() => handleBlock(id)} className="mt-4 bg-orange-400 hover:bg-orange-500 text-white py-1 px-4 rounded-full transition-colors duration-300 ease-in-out">
+        <button onClick={() => handleBlock(id?id:'')} className="mt-4 bg-orange-400 hover:bg-orange-500 text-white py-1 px-4 rounded-full transition-colors duration-300 ease-in-out">
           Restrict Action
         </button>
       ) : (
-        <button onClick={() => handleBlock(id)} className="mt-4 bg-green-400 hover:bg-green-500 text-white py-1 px-4 rounded-full transition-colors duration-300 ease-in-out">
+        <button onClick={() => handleBlock(id?id:'')} className="mt-4 bg-green-400 hover:bg-green-500 text-white py-1 px-4 rounded-full transition-colors duration-300 ease-in-out">
           Allow Action
         </button>
       )}

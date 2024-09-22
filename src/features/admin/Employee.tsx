@@ -6,19 +6,13 @@ import Modal from "../../components/Modal";
 import { listEmploye } from "../../services/apis/adminApi";
 import Pagination from '@mui/material/Pagination';
 import Stack from '@mui/material/Stack';
+import { EmployeeDataInterface } from "../../interfaces/EmployeeInterface";
 
-interface Employees {
-    name: string
-    email: string
-    phone: string
-    image: string
-    _id: string
-    is_restricted: boolean
-}
+
 
 const Employee = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const [employeeList, setEmployeeList] = useState<Employees[]>([])
+    const [employeeList, setEmployeeList] = useState<EmployeeDataInterface[]>([])
     const [is_block, setIs_block] = useState(false)
     const [page, setPage] = useState<number>(0);
     const [pageCount, setPageCount] = useState(0)

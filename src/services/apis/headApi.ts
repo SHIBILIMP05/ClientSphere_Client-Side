@@ -4,14 +4,13 @@ import headInstance from "./axios_instences/head_instance";
 
 
 
-
+/* Login */
 export const headLogin = async (data: HeadDetails) => {
     const response = await headInstance.post('/api/auth/head/login', data)
-    console.log("head response ===>", response);
-
     return response.data
 }
 
+/* Edit profile */
 export const editProfile = async ({ name, email, phone, address, city, country, pinCode, image }: ProfileDetails, id: string) => {
     try {
 
@@ -29,7 +28,6 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
             data.append("image", image);
         }
 
-
         const config = {
             headers: {
                 "content-type": "multipart/form-data",
@@ -37,15 +35,43 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
             },
             withCredentials: true,
         };
-        console.log("hello i landed");
 
         const response = await headInstance.post('/api/head/editProfile', data, config)
-        console.log("read response", response.data);
-
         return response.data
-
     } catch (error) {
         console.error(error);
         throw error
+    }
+}
+
+/* List new leads */
+export const listNewLeads = async () => {
+    try {
+        const response = await headInstance.get('/api/head/listNewLeads')
+        return response.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+/* List employees */
+export const listEmploye = async () => {
+    try {
+        
+        const response = await headInstance.get('/api/head/listEmployee')
+        return response.data
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+/* Assign leads to employees */
+export const assignLeads =async(empId:string,selectedRows:string[])=>{
+    try {
+        const response = await headInstance.post(`/api/head/assignLeads/${empId}`,{selectedRows:selectedRows})
+        return response.data
+    } catch (error) {
+        console.error(error);
+        
     }
 }
