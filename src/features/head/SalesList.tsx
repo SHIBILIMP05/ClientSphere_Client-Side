@@ -2,7 +2,6 @@ import { useState } from 'react';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import RotateLeftIcon from '@mui/icons-material/RotateLeft';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
-// import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
@@ -26,7 +25,6 @@ const SalesList = (props: Props) => {
         { id: '00001', name: 'Christine Brooks', address: '089 Kutch Green Apt. 448', date: '04 Sep 2019', type: 'Electric', status: 'Completed' },
         { id: '00001', name: 'Christine Brooks', address: '089 Kutch Green Apt. 448', date: '04 Sep 2019', type: 'Electric', status: 'Completed' },
         { id: '00001', name: 'Christine Brooks', address: '089 Kutch Green Apt. 448', date: '04 Sep 2019', type: 'Electric', status: 'Completed' },
-        // Add more sales data as needed
     ]);
 
     const handleDatechange = (date: Dayjs | null) => {

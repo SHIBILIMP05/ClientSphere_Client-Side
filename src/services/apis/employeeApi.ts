@@ -3,8 +3,6 @@ import { ProfileDetails } from "../../interfaces/AdminProfileInterfaces";
 import employeInstance from "./axios_instences/employe_instance.tsx";
 
 
-
-
 export const employeeLogin = async (data: EmployeeDetails) => {
     const response = await employeInstance.post('api/auth/employe/login', data)
     console.log("employee response ===>", response);
@@ -48,5 +46,26 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
     } catch (error) {
         console.error(error);
         throw error
+    }
+}
+
+export const listMyLeads = async(empId:string)=>{
+    try {
+        console.log("hello");
+        
+        const response = await employeInstance.get(`/api/employee/${empId}/listMyLeads`)
+        return response.data
+    } catch (error) {
+        console.error(error);
+        
+    }
+}
+
+export const fetchLeadInfo = async(leadId:string,empId:string)=>{
+    try {
+        const response = await employeInstance.get(`/api/employee/${empId}/fetchLeadInfo/${leadId}`)
+        return response.data
+    } catch (error) {
+        console.error(error);
     }
 }

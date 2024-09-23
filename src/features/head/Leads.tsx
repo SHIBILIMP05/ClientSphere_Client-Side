@@ -47,7 +47,7 @@ const Leads = (props: Props) => {
 
     // Handle bulk selection
     const selectRows = (count: number) => {
-        setSelectedRows(leads.slice(0, count).map(lead => lead._id));
+        setSelectedRows(leads.slice(0, count).map(lead => lead._id!));
     };
 
     /* Handle Popover open */
@@ -82,7 +82,7 @@ const Leads = (props: Props) => {
     };
 
     /* Handle lead assigning */
-    const handleLeadAssign = (id: string) => {
+    const handleLeadAssign = (id: string | undefined) => {
         if (selectedRows.length === 0) {
             toast.warning('Please select Leads', {
                 position: "top-center",
@@ -96,7 +96,7 @@ const Leads = (props: Props) => {
                 transition: Bounce,
             })
         } else {
-            const status = assignLeads(id, selectedRows)
+            const status = assignLeads(id!, selectedRows)
             status.then((data) => {
                 if (data.response.status === 200) {
                     toast.success(data.response.message, {
@@ -233,8 +233,8 @@ const Leads = (props: Props) => {
                                     <td className="py-4 px-6">
                                         <input
                                             type="checkbox"
-                                            checked={selectedRows.includes(lead._id)}
-                                            onChange={() => toggleRowSelection(lead._id)}
+                                            checked={selectedRows.includes(lead._id!)}
+                                            onChange={() => toggleRowSelection(lead._id!)}
                                             className="cursor-pointer"
                                         />
                                     </td>

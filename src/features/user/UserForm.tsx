@@ -73,6 +73,7 @@ const LeadForm = () => {
                     theme: "light",
                     transition: Bounce,
                   })
+                  setIsOpen(true)
                 } else {
                   toast.error(data.response.message, {
                     position: "top-center",
@@ -89,7 +90,7 @@ const LeadForm = () => {
 
                 setSubmitting(false);
                 resetForm()
-                setIsOpen(true)
+                
               })
             }}
           >

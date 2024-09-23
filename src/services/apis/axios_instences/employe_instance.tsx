@@ -9,7 +9,6 @@ const employeInstance = axios.create({
 // Intercepting Response 
 employeInstance.interceptors.response.use((res) => {
 
-    console.log("IIres---", res);
     return res
 
 }, (err) => {

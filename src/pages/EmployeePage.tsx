@@ -3,6 +3,7 @@ import SideBar from "../features/employee/SideBar"
 import Navbar from "../features/employee/Navbar"
 import Dashboard from "../features/employee/Dashboard"
 import Profile from "../features/employee/Profile"
+import Leads from "../features/employee/Leads"
 
 
 const EmployeePage = () => {
@@ -27,6 +28,7 @@ const EmployeePage = () => {
 
         {dashboard && <Dashboard />}
         {profileInfo&&<Profile/>}
+        {leads&&<Leads/>}
 
 
       </div>
