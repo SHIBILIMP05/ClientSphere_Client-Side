@@ -1,6 +1,7 @@
 import { EmployeeDetails } from "../../interfaces/LogInterface";
 import { ProfileDetails } from "../../interfaces/AdminProfileInterfaces";
 import employeInstance from "./axios_instences/employe_instance.tsx";
+import { LeadData } from "../../interfaces/LeadsInterfaces.ts";
 
 
 export const employeeLogin = async (data: EmployeeDetails) => {
@@ -38,10 +39,10 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
         console.log("hello i landed");
 
         const response = await employeInstance.post(`/api/employee/${id}/editProfile`, data, config)
-        
-            console.log("read response=====>", response.data);            
-            return response.data
-        
+
+        console.log("read response=====>", response.data);
+        return response.data
+
 
     } catch (error) {
         console.error(error);
@@ -49,23 +50,44 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
     }
 }
 
-export const listMyLeads = async(empId:string)=>{
+export const listMyLeads = async (empId: string) => {
     try {
         console.log("hello");
-        
+
         const response = await employeInstance.get(`/api/employee/${empId}/listMyLeads`)
         return response.data
     } catch (error) {
         console.error(error);
-        
+
     }
 }
 
-export const fetchLeadInfo = async(leadId:string,empId:string)=>{
+export const fetchLeadInfo = async (leadId: string, empId: string) => {
     try {
         const response = await employeInstance.get(`/api/employee/${empId}/fetchLeadInfo/${leadId}`)
         return response.data
     } catch (error) {
         console.error(error);
+    }
+}
+
+export const updateLeadInfo = async (empId: string, leadData: LeadData, leadId: string) => {
+    try {
+        console.log("leadDetail", leadData);
+        const response = await employeInstance.post(`/api/employee/${empId}/updateLeadInfo/${leadId}`, { leadData: leadData })
+        return response.data
+    } catch (error) {
+        console.error(error);
+
+    }
+}
+
+export const listHistory = async (empId: string) => {
+    try {
+        const response = await employeInstance.get(`/api/employee/${empId}/listHistory`)
+        return response.data
+    } catch (error) {
+        console.error(error);
+
     }
 }

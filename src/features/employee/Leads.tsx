@@ -31,7 +31,7 @@ const Leads = () => {
         setOpen(false);
     };
    
-    /* handle edit lead info pop-up */
+    /* handle edit lead-info pop-up */
     const handleIs_open = () => {
         handleClose()
         setIs_open(true);
@@ -144,7 +144,7 @@ const Leads = () => {
                 </div>
             </div>
             {open && <LeadDetailsPopup open={open} handleClose={handleClose} selectedLeadId={selectedLeadId} handleIs_open={handleIs_open}/>}
-            {is_open && <EditLeadDetails is_open={is_open} handleIs_closed={handleIs_closed} />}
+            {is_open && <EditLeadDetails is_open={is_open} handleIs_closed={handleIs_closed} selectedLeadId={selectedLeadId} />}
         </>
     )
 }

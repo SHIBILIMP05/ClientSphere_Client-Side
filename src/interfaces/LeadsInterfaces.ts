@@ -7,10 +7,11 @@ export interface LeadData {
     phone: string;
     company: string;
     leadSource: string;
-    message: string;
+    message?: string;
     address?: string;
     city?: string;
     country?: string,
+    state?:string,
     pinCode?: string,
     lead_holder?: EmployeeDataInterface
     lead_status?: string
