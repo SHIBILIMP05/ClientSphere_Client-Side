@@ -1,38 +1,50 @@
 import { useEffect, useState } from 'react';
-import { dashboardPorpesInterface } from '../../interfaces/AdminDashboardInterfaces';
 import AccountCircleRoundedIcon from '@mui/icons-material/AccountCircleRounded';
 import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { employeDetails } from '../../store/slice/employeeSlice';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
-const Navbar = (props: Omit<dashboardPorpesInterface, "setAllSales" | "setHead" | "setEmployee">) => {
+const Navbar = () => {
     const [title, setTitle] = useState('')
     const [isOpen, setIsOpen] = useState(false)
 
     const employe = useSelector((state: RootState) => state.Employe)
     const dispatch = useDispatch()
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+  const location = useLocation();
 
-    useEffect(() => {
-        if (props.dashboard) {
-            setTitle('Dashboard');
-        } else if (props.leads) {
-            setTitle('Leads');
-        } else if (props.inbox) {
-            setTitle('Inbox');
-        } else if (props.call) {
-            setTitle('Call');
-        } else if (props.messenger) {
-            setTitle('Messenger');
-        } else if (props.toDo) {
-            setTitle('To-Do');
-        } else if (props.profileInfo) {
-            setTitle('Profile Info');
-        }
-    }, [props.dashboard, props.leads, props.inbox, props.call, props.toDo, props.messenger, props.profileInfo]);
+  useEffect(() => {
+    const path = location.pathname.split('/')
+    const pthName = path[path.length - 2];
+    switch (pthName) {
+      case 'dashboard':
+        setTitle('Dashboard');
+        break;
+      case 'leads':
+        setTitle('Leads');
+        break;
+      case 'inbox':
+        setTitle('Inbox');
+        break;
+      case 'messenger':
+        setTitle('Messenger');
+        break;
+      case 'profile':
+        setTitle('Profile Info');
+        break;
+      case 'call':
+        setTitle('Call');
+        break;
+      case 'toDo':
+        setTitle('To-Do');
+        break;
+      default:
+        setTitle('Admin Panel');
+    }
+  }, [location.pathname]);
 
     const handleLogOut = () => {
         dispatch(
@@ -71,14 +83,7 @@ const Navbar = (props: Omit<dashboardPorpesInterface, "setAllSales" | "setHead" 
             {isOpen && (
                 <div className="absolute right-3 top-[71px] mt-2 w-48 bg-white border border-gray-200 rounded-lg shadow-lg z-30">
                     <h1 onClick={() => {
-                        props.setDashboard(false)
-                        props.setLeads(false)
-                        props.setInbox(false)
-                        props.setCall(false)
-                        props.setMessenger(false)
-                        props.setToDo(false)
-                        props.setProfileInfo(true)
-
+                        navigate('/employee/profile/');
                     }} className="block px-4 py-2 text-gray-700 hover:bg-gray-100 cursor-pointer">
                         <AccountCircleRoundedIcon fontSize='small' color='primary' /> Manage Account
                     </h1>

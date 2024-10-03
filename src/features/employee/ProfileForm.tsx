@@ -16,7 +16,7 @@ interface Props {
 const ProfileForm = (props: Props) => {
     const employe = useSelector((state: RootState) => state.Employe);
     const dispatch = useDispatch()
-    // Define the validation schema using Yup
+    //  validation schema 
     const validationSchema = Yup.object().shape({
         name: Yup.string().required('Full Name is required'),
         email: Yup.string().email('Invalid email format').required('Email is required'),
@@ -86,7 +86,7 @@ const ProfileForm = (props: Props) => {
         >
             {({ setFieldValue }) => (
                 <Form className="bg-white mt-3 p-6 rounded-md shadow-md">
-                    {/* form section */}
+                   
                     <div className="flex items-center space-x-6 mb-8 relative">
                         <div className="flex  relative">
                             {employe.image ? (
@@ -151,7 +151,7 @@ const ProfileForm = (props: Props) => {
                         </div>
                     </div>
 
-                    {/* Profile Info Form */}
+                  
                     <div className="grid grid-cols-2 gap-6">
                         <div>
                             <label className="block text-gray-700">Full Name</label>
@@ -192,7 +192,7 @@ const ProfileForm = (props: Props) => {
                             >
                                 <option value="">Select Your Country</option>
                                 <option value='India'>India</option>
-                                {/* Add more options as needed */}
+                                
                             </Field>
                             <ErrorMessage name="country" component="div" className="text-red-500 text-sm mt-1" />
                         </div>
@@ -228,7 +228,7 @@ const ProfileForm = (props: Props) => {
                         </div>
                     </div>
 
-                    {/* Edit Button */}
+                    
                     <div className="mt-4 text-right">
                         <button type="submit" className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 focus:outline-none">
                             Submit

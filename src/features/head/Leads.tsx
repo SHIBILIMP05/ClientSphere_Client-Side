@@ -10,22 +10,21 @@ import { LeadData } from '../../interfaces/LeadsInterfaces';
 import { Bounce, toast } from 'react-toastify';
 import '../../assets/Styles/scroleBarStyle.css'
 import { EmployeeDataInterface } from '../../interfaces/EmployeeInterface';
+import { useNavigate } from 'react-router-dom';
 
-interface Props {
-    setIsLeadsSection: React.Dispatch<React.SetStateAction<boolean>>;
-}
 
-const Leads = (props: Props) => {
+
+const Leads = () => {
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [leads, setLeads] = useState<LeadData[]>([])
     const [selectedRows, setSelectedRows] = useState<string[]>([]);
     const [employeeList, setEmployeeList] = useState<EmployeeDataInterface[]>([])
-    const [searchTerm, setSearchTerm] = useState<string>(''); // State for search input
+    const [searchTerm, setSearchTerm] = useState<string>('');
     const [filteredEmployees, setFilteredEmployees] = useState<EmployeeDataInterface[]>([]);
 
+    const navigate = useNavigate()
 
     useEffect(() => {
-        console.log("hwllo started");
 
         const newLeads = listNewLeads()
         newLeads.then((data) => {
@@ -45,7 +44,7 @@ const Leads = (props: Props) => {
         );
     };
 
-    // Handle bulk selection
+    /* Handle bulk selection */
     const selectRows = (count: number) => {
         setSelectedRows(leads.slice(0, count).map(lead => lead._id!));
     };
@@ -121,10 +120,10 @@ const Leads = (props: Props) => {
 
     return (
         <div className="mt-4 bgwhite relative">
-            {/* Top Actions */}
+
             <div className="flex justify-between items-center mb-4">
                 <div className="flex ">
-                    <button onClick={() => props.setIsLeadsSection(false)} className=' bg-white border border-gray-300 rounded-s-lg p-2'>
+                    <button onClick={() => navigate('/head/sales&leads/')} className=' bg-white border border-gray-300 rounded-s-lg p-2'>
 
                         <span >
                             <ArrowBackIcon color="action" />
@@ -147,12 +146,9 @@ const Leads = (props: Props) => {
                         Select Person
                     </button>
                 </div>
-                <button className="bg-green-500 hover:bg-green-600 text-white py-2 px-4 rounded-lg">
-                    Assign Leads
-                </button>
+                
             </div>
 
-            {/* Employee Selection Card */}
 
             <Popover
                 open={isPopoverOpen}
@@ -206,13 +202,13 @@ const Leads = (props: Props) => {
 
                         ))}
 
-                        {/* Other selection card details */}
+
                     </ul>
                 </DialogContent>
             </Popover>
 
 
-            {/* Leads Table */}
+
             <div className="overflow-x-auto relative shadow-md rounded-lg">
                 <table className="w-full text-sm text-left text-gray-500">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b-2 border-gray-300">

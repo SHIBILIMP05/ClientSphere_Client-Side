@@ -79,7 +79,7 @@ export const updateLeadInfo = async (empId: string, leadData: LeadData, leadId: 
     } catch (error) {
         console.error(error);
 
-    }
+    } 
 }
 
 export const listHistory = async (empId: string) => {
@@ -89,5 +89,15 @@ export const listHistory = async (empId: string) => {
     } catch (error) {
         console.error(error);
 
+    }
+}
+
+export const addLead = async(empId:string,leadData:LeadData)=>{
+    try {
+        const response = await employeInstance.post(`/api/employee/${empId}/addLead`,{leadData:leadData})
+        return response.data
+    } catch (error) {
+        console.error(error);
+        
     }
 }

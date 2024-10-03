@@ -19,7 +19,6 @@ const App: React.FC = () => {
         <Route path="/admin/*" element={<AdminRouts position={"admin"} />} />
         <Route path="/head/*" element={<HeadRouts position={"head"}/>} />
         <Route path="/employee/*" element={<EmployeeRouts position={"employee"}/>} />
-
       </Routes>
     </Router>
     </PersistGate>

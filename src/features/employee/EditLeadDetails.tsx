@@ -125,7 +125,7 @@ const EditLeadDetails = ({ is_open, handleIs_closed, selectedLeadId }: Props) =>
             {({ isSubmitting, handleChange, values }) => (
               <Form>
                 <Grid container spacing={3}>
-                  {/* Lead Details */}
+                 
                   <Grid item xs={12} md={6}>
                     <Typography variant="subtitle1" fontWeight="bold">
                       Lead Details

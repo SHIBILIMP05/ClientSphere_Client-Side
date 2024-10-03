@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import { Dialog, DialogContent, DialogTitle, Typography, Button, Grid, Divider, Popover } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, Typography, Button, Grid } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import CloseIcon from '@mui/icons-material/Close';
-import { fetchLeadInfo, listHistory } from '../../services/apis/employeeApi';
+import { fetchLeadInfo } from '../../services/apis/employeeApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { LeadData } from '../../interfaces/LeadsInterfaces';
 import EditNoteIcon from '@mui/icons-material/EditNote';
 import Chip from '@mui/material/Chip';
-import HistoryIcon from '@mui/icons-material/History';
-import { HistoryData } from '../../interfaces/HistoryInterfaces';
-import NotesIcon from '@mui/icons-material/Notes';
+
 
 interface Props {
     handleClose: React.Dispatch<React.SetStateAction<boolean>>;
@@ -22,8 +20,7 @@ interface Props {
 const LeadDetailsPopup = ({ open, handleClose, selectedLeadId, handleIs_open }: Props) => {
     const employe = useSelector((state: RootState) => state.Employe)
     const [leadInfo, setLeadInfo] = useState<LeadData>()
-    const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-    const [historyList, setHistoryList] = useState<HistoryData[]>([]);
+
 
 
 
@@ -34,25 +31,6 @@ const LeadDetailsPopup = ({ open, handleClose, selectedLeadId, handleIs_open }: 
         })
     }, [])
 
-    /* Handle Popover open */
-    const handlePopoverOpen = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
-        const status = listHistory(employe.id)
-        status.then((data) => {
-            if (data.response.status === 200) {
-                console.log('historyList', data.response);
-                setHistoryList(data.response.historyList)
-            } else {
-
-            }
-        })
-    };
-
-    /* Handle Popover close */
-    const handlePopoverClose = () => {
-        setAnchorEl(null);
-    };
-    const isPopoverOpen = Boolean(anchorEl);
 
     return (
         <>
@@ -81,9 +59,7 @@ const LeadDetailsPopup = ({ open, handleClose, selectedLeadId, handleIs_open }: 
                         Leads Details
                     </Typography>
                     <div className='space-x-1'>
-                        <Button onClick={handlePopoverOpen} className="text-gray-700 hover:text-gray-600 min-w-0 p-0">
-                            <HistoryIcon fontSize='medium' color='action' />
-                        </Button>
+
                         <Button className="text-gray-700 hover:text-gray-600 min-w-0 p-0">
                             <PhoneIcon fontSize='medium' color='success' />
                         </Button>
@@ -245,69 +221,7 @@ const LeadDetailsPopup = ({ open, handleClose, selectedLeadId, handleIs_open }: 
                     </Grid>
                 </DialogContent>
             </Dialog>
-            <Popover
-                open={isPopoverOpen}
-                anchorEl={anchorEl}
-                onClose={handlePopoverClose}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'center',
-                }}
-                transformOrigin={{
-                    vertical: 'top',
-                    horizontal: 'center',
 
-                }}
-                slotProps={{
-                    paper: {
-                        style: {
-                            borderRadius: "8px",
-                            boxShadow: '2px'
-                        }
-                    }
-                }}
-            >
-                <DialogContent className='flex flex-col items-center '>
-                    <h5 className='text-xl flex self-start'>
-                        History
-                    </h5>
-                    {/* <Divider sx={{ width: 280, border: 1, borderColor: "gray" }} orientation="horizontal" /> */}
-
-                    
-                    <ul className='flex flex-col self-start overflow-y-auto custom-scrollbar ' style={{ maxHeight: '275px', width: '100%' }}>
-                        {historyList.map((history, index) => (
-                            <li key={index} className="bg-gray-100 shadow-md rounded-lg p-3 flex  items-center space-x-3 my-2">
-                               
-                                <div className="flex-shrink-0 " >
-                                    <span className="rounded-full bg-indigo-100 p-2 ">
-                                       
-                                        {/* <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 text-indigo-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 10l4.586 4.586a1 1 0 010 1.414l-1.586 1.586a1 1 0 01-1.414 0L12 13.414l-4.586 4.586a1 1 0 01-1.414 0L4.414 16a1 1 0 010-1.414L9 10l-4.586-4.586a1 1 0 010-1.414l1.586-1.586a1 1 0 011.414 0L12 6.586l4.586-4.586a1 1 0 011.414 0L19 5.414a1 1 0 010 1.414L15 10z" />
-                                        </svg> */}
-                                        <NotesIcon/>
-                                    </span>
-                                </div>
-
-                                
-                                <div className="flex flex-col">
-                                    <span className="text-sm font-semibold text-gray-900">
-                                        {history.message}
-                                    </span>
-                                    <span className="text-sm text-gray-400">
-                                        {history.leadId.name}
-                                    </span>
-                                    <span className="text-sm text-gray-600">
-                                        {history.leadId.email}
-                                    </span>
-                                    <span className="text-xs text-gray-400">
-                                        {new Date(history.date).toLocaleDateString()} - {new Date(history.date).toLocaleTimeString()}
-                                    </span>
-                                </div>
-                            </li>
-                        ))}
-                    </ul>
-                </DialogContent>
-            </Popover>
 
         </>
     );

@@ -1,15 +1,17 @@
-import { Route,Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import Login from "../features/common/Login"
 import { Bounce, ToastContainer } from "react-toastify"
 import EmployeeLogOutAuth from "../services/authentications/EmployeeLogOut"
 import EmployeeLogAuth from "../services/authentications/EmployeeLogAuth"
-import EmployeePage from "../pages/EmployeePage"
-interface position{
-    position:string
-  }
-const EmployeeRouts = ({position}:position) => {
-    return (
-      <>
+import DashboardPage from "../pages/Employee pages/DashboardPage"
+import LeadsPage from "../pages/Employee pages/LeadsPage"
+import ProfilePage from "../pages/Employee pages/ProfilePage"
+interface position {
+  position: string
+}
+const EmployeeRouts = ({ position }: position) => {
+  return (
+    <>
       <ToastContainer
         position="top-center"
         autoClose={5000}
@@ -21,15 +23,17 @@ const EmployeeRouts = ({position}:position) => {
         draggable
         pauseOnHover
         theme="light"
-        transition={Bounce} 
+        transition={Bounce}
       />
       <Routes>
-          <Route path="/" element={<EmployeeLogOutAuth><Login position={position} /></EmployeeLogOutAuth>} />
-          <Route path="/dashboard" element={<EmployeeLogAuth><EmployeePage/></EmployeeLogAuth>} />
-          <Route path="/login" element={<EmployeeLogOutAuth><Login position={position} /></EmployeeLogOutAuth>} />
+        <Route path="/" element={<EmployeeLogOutAuth><Login position={position} /></EmployeeLogOutAuth>} />
+        <Route path="/login" element={<EmployeeLogOutAuth><Login position={position} /></EmployeeLogOutAuth>} />
+        <Route path="/dashboard/*" element={<EmployeeLogAuth><DashboardPage /></EmployeeLogAuth>} />
+        <Route path="/leads/*" element={<EmployeeLogAuth><LeadsPage /></EmployeeLogAuth>} />
+        <Route path="/profile/*" element={<EmployeeLogAuth><ProfilePage /></EmployeeLogAuth>} />
       </Routes>
-      </>
-    )
-  }
+    </>
+  )
+}
 
-  export default EmployeeRouts
+export default EmployeeRouts

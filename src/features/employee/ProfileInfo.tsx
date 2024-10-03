@@ -10,15 +10,15 @@ const ProfileInfo = (props: Props) => {
 
   return (
     <div className="bg-white mt-3 p-6 rounded-md shadow-md">
-      {/* Profile Header */}
+     
       <div className="flex items-center space-x-6 mb-8 relative">
         {employe.image ? (
           <img
-            src={employe.image} // Replace with actual image path
+            src={employe.image} 
             alt="Profile"
             className="w-20 h-20 rounded-full object-cover  border-[#6735CC] border-4"
           />) : (<img
-            src={`https://ui-avatars.com/api/?name=${employe.name}`} // Replace with actual image path
+            src={`https://ui-avatars.com/api/?name=${employe.name}`} 
             alt="Profile"
             className="w-20 h-20 rounded-full object-cover  border-[#6735CC] border-4"
           />)
@@ -28,7 +28,7 @@ const ProfileInfo = (props: Props) => {
           <h2 className="text-2xl font-semibold">{employe.name}</h2>
           <p className="text-gray-600">Admin</p>
         </div>
-        {/* Edit Button */}
+        
         <div className="mt-8 text-right absolute right-0 ">
           <button onClick={() => props.setIsEdit(true)} className=" bg-[#4182F9] w-[86px] h-[44px] text-white rounded-lg shadow hover:bg-blue-600 focus:outline-none">
             Edit
