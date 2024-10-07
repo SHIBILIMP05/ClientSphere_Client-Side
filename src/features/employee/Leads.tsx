@@ -5,53 +5,48 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Dayjs } from 'dayjs';
-import LeadDetailsPopup from './LeadDetailsPopup';
 import { listHistory, listMyLeads } from '../../services/apis/employeeApi';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import { LeadData } from '../../interfaces/LeadsInterfaces';
-import EditLeadDetails from './EditLeadDetails';
 import AddIcon from '@mui/icons-material/Add';
 import AddLead from './AddLead';
-import { Button, DialogContent, Popover } from '@mui/material';
+import { Button, DialogContent, InputAdornment, Pagination, Popover, Stack, TextField } from '@mui/material';
 import HistoryIcon from '@mui/icons-material/History';
 import NotesIcon from '@mui/icons-material/Notes';
 
 import { HistoryData } from '../../interfaces/HistoryInterfaces';
+import MultipleSelectPlaceholder from '../../components/SelectorField';
+import SearchIcon from '@mui/icons-material/Search';
+import { useDebounce } from '../../services/Hooks/debounceHooks';
+import { useNavigate } from 'react-router-dom';
 
 
 
 
 const Leads = () => {
     const employe = useSelector((state: RootState) => state.Employe)
-    const [open, setOpen] = useState(false);
-    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
+
     const [leads, setLeads] = useState<LeadData[]>([]);
-    const [selectedLeadId, setSelectedLeadId] = useState('')
-    const [is_open, setIs_open] = useState(false);
     const [is_addLeadOpen, setIs_addLeadOpen] = useState(false);
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const [historyList, setHistoryList] = useState<HistoryData[]>([]);
+    const [selectedDate, setSelectedDate] = useState<Dayjs | null>(null)
+    const [selectedStatus, setSelectedStatus] = useState<string[]>([]);
+    const [searchQuery, setSearchQuery] = useState('');
+    const [page, setPage] = useState<number>(0);
+    const [pageCount, setPageCount] = useState(0)
 
-    /* handle lead info pop-up */
+    const debouncedSearch = useDebounce(searchQuery)
+    const navigate = useNavigate()
+    /* navigating to leads info page */
     const handleOpen = (id: string) => {
-        setOpen(true);
-        setSelectedLeadId(id)
+
+        navigate(`/employee/leads/info/${id}`)
     };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
 
-    /* handle edit lead-info pop-up */
-    const handleIs_open = () => {
-        handleClose()
-        setIs_open(true);
-    };
 
-    const handleIs_closed = () => {
-        setIs_open(false);
-    };
 
     /* handle add lead pop-up */
     const handleIs_addLeadOpen = () => {
@@ -69,12 +64,15 @@ const Leads = () => {
         const status = listHistory(employe.id)
         status.then((data) => {
             if (data.response.status === 200) {
-
                 setHistoryList(data.response.historyList)
             } else {
 
             }
         })
+    };
+    /* handle pagination */
+    const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value - 1)
     };
 
     /* Handle Popover close */
@@ -85,21 +83,26 @@ const Leads = () => {
 
 
     useEffect(() => {
-
-        const status = listMyLeads(employe.id)
+        console.log("date", selectedDate);
+        const status = listMyLeads(employe.id, page, debouncedSearch, selectedStatus, selectedDate?.format('YYYY-MM-DD'))
         status.then((data) => {
-            console.log("data====", data);
             setLeads(data.response.leadsList)
+            setPageCount(data.response.count)
+
 
         })
-    }, [])
+    }, [debouncedSearch, selectedStatus, selectedDate, page, employe.id])
 
 
     const handleDatechange = (date: Dayjs | null) => {
         setSelectedDate(date)
-        console.log(date?.format('YYY-MM-DD'));
-
     }
+
+    const handleResetFilters = () => {
+        setSearchQuery('');
+        setSelectedStatus([]);
+        setSelectedDate(null);
+    };
 
     return (
         <>
@@ -136,19 +139,34 @@ const Leads = () => {
                                 }}
                             />
                         </LocalizationProvider>
-                        <select className="font-medium bg-white border border-gray-300  p-2 cursor-pointer ">
-                            <option value="">Priority</option>
-                            <option value="">High Priority</option>
-                            <option value="">Low Priority</option>
+                        <MultipleSelectPlaceholder selectedStatus={selectedStatus} setSelectedStatus={setSelectedStatus} />
+                        <TextField
+                            id="input-with-icon-textfield"
+                            color='secondary'
+                            type="search"
+                            placeholder='Search'
+                            value={searchQuery}
+                            onChange={(e) => setSearchQuery(e.target.value)}
+                            InputProps={{
+                                startAdornment: (
+                                    <InputAdornment position="start">
+                                        <SearchIcon />
+                                    </InputAdornment>
+                                ),
+                            }}
+                            sx={{
+                                width: '200px',
+                                height: '44px',
+                                backgroundColor: '#fff',
+                                '& .MuiInputBase-root': {
+                                    height: '100%',
+                                }
+                            }}
+                        />
 
-                        </select>
-                        <select className="font-medium bg-white border border-gray-300  p-2 cursor-pointer">
-                            <option value="">Status</option>
-                            <option value="">Status</option>
-                            <option value="">Status</option>
-
-                        </select>
-                        <button className=" bg-white border border-gray-300 hover:bg-gray-200 rounded-e-lg text-red-600 py-2 cursor-pointer px-4 ">
+                        <button
+                            onClick={handleResetFilters}
+                            className=" bg-white border border-gray-300 hover:bg-gray-200 rounded-e-lg text-red-600 py-2 cursor-pointer px-4 ">
                             <span>
                                 <RotateLeftIcon color='error' />
                             </span>
@@ -175,25 +193,31 @@ const Leads = () => {
                     <table className="w-full text-sm text-left text-gray-500">
                         <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b-2 border-gray-300">
                             <tr>
-                                <th scope="col" className="py-3 px-6">ID</th>
-                                <th scope="col" className="py-3 px-6">Name</th>
-                                <th scope="col" className="py-3 px-6">Email</th>
-                                <th scope="col" className="py-3 px-6">Date</th>
-                                <th scope="col" className="py-3 px-6">Status</th>
+                                <th scope="col" className="py-4 px-6">ID</th>
+                                <th scope="col" className="py-4 px-6">Name</th>
+                                <th scope="col" className="py-4 px-6">Email</th>
+                                <th scope="col" className="py-4 px-6">Date</th>
+                                <th scope="col" className="py-4 px-6">Status</th>
                             </tr>
                         </thead>
                         <tbody>
                             {leads && leads.map((lead, index) => (
                                 <tr key={lead._id} onClick={() => (handleOpen(lead._id!))} className="bg-white border-b hover:bg-gray-50 cursor-pointer">
-                                    <th scope="row" className="py-4 px-6 font-medium text-gray-900 whitespace-nowrap">#{index + 1000}</th>
-                                    <td className="py-4 px-6">{lead.name}</td>
-                                    <td className="py-4 px-6">{lead.email}</td>
-                                    <td className="py-4 px-6">{lead.date ? new Date(lead.date).toLocaleDateString() : 'N/A'}</td>
-                                    <td className="py-4 px-6">{lead.lead_status}</td>
+                                    <th scope="row" className="py-3 px-6 font-medium text-gray-900 whitespace-nowrap">#{index + 1000}</th>
+                                    <td className="py-3 px-6">{lead.name}</td>
+                                    <td className="py-3 px-6">{lead.email}</td>
+                                    <td className="py-3 px-6">{lead.date ? new Date(lead.date).toLocaleDateString() : 'N/A'}</td>
+                                    <td className="py-3 px-6">{lead.lead_status}</td>
                                 </tr>
                             ))}
                         </tbody>
                     </table>
+                </div>
+                <div className="flex justify-between mt-3 fixed bottom-6 ">
+                    <h1 className="font-semibold text-[#7D50E1] ml-5">Page: {page + 1}</h1>
+                    <Stack className="fixed right-5">
+                        <Pagination count={pageCount} shape="rounded" color="standard" onChange={handlePageChange} />
+                    </Stack>
                 </div>
             </div>
             <Popover
@@ -259,8 +283,6 @@ const Leads = () => {
                     </ul>
                 </DialogContent>
             </Popover>
-            {open && <LeadDetailsPopup open={open} handleClose={handleClose} selectedLeadId={selectedLeadId} handleIs_open={handleIs_open} />}
-            {is_open && <EditLeadDetails is_open={is_open} handleIs_closed={handleIs_closed} selectedLeadId={selectedLeadId} />}
             {is_addLeadOpen && <AddLead handleIs_addLeadClosed={handleIs_addLeadClosed} is_addLeadOpen={is_addLeadOpen} />}
         </>
     )

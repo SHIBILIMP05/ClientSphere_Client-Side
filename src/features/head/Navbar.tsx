@@ -6,6 +6,8 @@ import { RootState } from '../../store/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { headDetails } from '../../store/slice/headSlice';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
+
 
 const Navbar = () => {
     const [title, setTitle] = useState('')
@@ -64,12 +66,12 @@ const Navbar = () => {
             <div className="flex items-center space-x-4">
                 <div className="text-xl font-semibold">{title}</div>
             </div>
-            <div className="flex items-center space-x-4" onClick={() => setIsOpen(!isOpen)}>
+            <div className="flex items-center space-x-4" >
                 <div className="relative">
-                    <i className="fas fa-bell text-gray-600"></i>
+                    <NotificationsNoneIcon/>
                     <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full"></span>
                 </div>
-                <div className="flex items-center space-x-2">
+                <div onClick={() => setIsOpen(!isOpen)} className=" cursor-pointer flex items-center space-x-2">
                     {head.image ? <img src={head.image} className="w-8 h-8 rounded-full border-[#6735CC] border-2" /> : <img src={`https://ui-avatars.com/api/?name=${head.name}&background=random`} className="w-8 h-8 rounded-full border-[#6735CC] border-2" />}
                     <div className="text-sm">{head.name}</div>
                 </div>

@@ -7,6 +7,7 @@ import LockResetRoundedIcon from '@mui/icons-material/LockResetRounded';
 import LogoutRoundedIcon from '@mui/icons-material/LogoutRounded';
 import { adminDetails } from '../../store/slice/adminSlice';
 import { useNavigate } from 'react-router-dom';
+import NotificationsNoneIcon from '@mui/icons-material/NotificationsNone';
 
 const Navbar = () => {
   const [title, setTitle] = useState('');
@@ -64,12 +65,12 @@ const Navbar = () => {
       <div className="flex items-center space-x-4">
         <div className="text-xl font-semibold">{title}</div>
       </div>
-      <div className="flex items-center space-x-4" onClick={() => setIsOpen(!isOpen)}>
+      <div className="flex items-center space-x-4" >
         <div className="relative">
-          <i className="fas fa-bell text-gray-600"></i>
+          <NotificationsNoneIcon/>
           <span className="absolute top-0 right-0 inline-block w-2 h-2 bg-red-600 rounded-full"></span>
         </div>
-        <div className="flex items-center space-x-2">
+        <div onClick={() => setIsOpen(!isOpen)} className="flex items-center cursor-pointer space-x-2">
           {admin.image ? (
             <img src={admin.image} className="w-8 h-8 rounded-full border-[#6735CC] border-2" />
           ) : (

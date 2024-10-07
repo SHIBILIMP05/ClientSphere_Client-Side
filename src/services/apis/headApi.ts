@@ -45,9 +45,9 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
 }
 
 /* List new leads */
-export const listNewLeads = async () => {
+export const listNewLeads = async (page:number) => {
     try {
-        const response = await headInstance.get('/api/head/listNewLeads')
+        const response = await headInstance.get(`/api/head/listNewLeads/${page}`)
         return response.data
     } catch (error) {
         console.error(error);

@@ -30,24 +30,15 @@ const Employee = () => {
         console.log(employeeList);
 
         employeeList.then((data) => {
-            console.log("helloooo", data);
             setEmployeeList(data.employeList.employeList)
-            console.log("pagecount==>", data.employeList.count);
-
             setPageCount(data.employeList.count)
         })
 
     }, [is_block, isModalOpen, page])
 
 
-
-    console.log("aftervaluueee ===", page);
-    console.log("pagecount==>", pageCount);
-
-
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
         setPage(value - 1)
-        console.log("beforvaluueee ===", page);
     };
 
     return (

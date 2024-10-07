@@ -50,11 +50,15 @@ export const editProfile = async ({ name, email, phone, address, city, country, 
     }
 }
 
-export const listMyLeads = async (empId: string) => {
+export const listMyLeads = async (empId: string, page: number, debouncedSearch?: string, selectedStatus?: string[], selectedDate?: string) => {
     try {
-        console.log("hello");
 
-        const response = await employeInstance.get(`/api/employee/${empId}/listMyLeads`)
+        const params = new URLSearchParams()
+        if (debouncedSearch) params.append('search', debouncedSearch)
+        if (selectedStatus && selectedStatus.length > 0) params.append('status', selectedStatus.join(','))
+        if (selectedDate) params.append('date', selectedDate)
+
+        const response = await employeInstance.get(`/api/employee/${empId}/listMyLeads/${page}?${params.toString()}`)
         return response.data
     } catch (error) {
         console.error(error);
@@ -79,7 +83,7 @@ export const updateLeadInfo = async (empId: string, leadData: LeadData, leadId: 
     } catch (error) {
         console.error(error);
 
-    } 
+    }
 }
 
 export const listHistory = async (empId: string) => {
@@ -92,12 +96,12 @@ export const listHistory = async (empId: string) => {
     }
 }
 
-export const addLead = async(empId:string,leadData:LeadData)=>{
+export const addLead = async (empId: string, leadData: LeadData) => {
     try {
-        const response = await employeInstance.post(`/api/employee/${empId}/addLead`,{leadData:leadData})
+        const response = await employeInstance.post(`/api/employee/${empId}/addLead`, { leadData: leadData })
         return response.data
     } catch (error) {
         console.error(error);
-        
+
     }
 }

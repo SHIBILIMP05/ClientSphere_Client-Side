@@ -9,17 +9,17 @@ import { fetchLeadInfo, updateLeadInfo } from '../../services/apis/employeeApi';
 import { Bounce, toast } from 'react-toastify';
 
 interface Props {
-  handleIs_closed: React.Dispatch<React.SetStateAction<boolean>>;
-  selectedLeadId: string
-  is_open: boolean;
+  handleEditPopup: React.Dispatch<React.SetStateAction<boolean>>;
+  leadId: string
+  editOpen: boolean;
 }
 
-const EditLeadDetails = ({ is_open, handleIs_closed, selectedLeadId }: Props) => {
+const EditLeadDetails = ({ editOpen, handleEditPopup, leadId }: Props) => {
   const employe = useSelector((state: RootState) => state.Employe)
   const [leadInfo, setLeadInfo] = useState<LeadData>()
 
   useEffect(() => {
-    const status = fetchLeadInfo(selectedLeadId, employe.id)
+    const status = fetchLeadInfo(leadId, employe.id)
     status.then((data) => {
       console.log("[[[[[", data.response);
 
@@ -53,8 +53,8 @@ const EditLeadDetails = ({ is_open, handleIs_closed, selectedLeadId }: Props) =>
             },
           },
         }}
-        open={is_open}
-        onClose={handleIs_closed}
+        open={editOpen}
+        onClose={handleEditPopup}
         maxWidth="md"
         fullWidth
         PaperProps={{

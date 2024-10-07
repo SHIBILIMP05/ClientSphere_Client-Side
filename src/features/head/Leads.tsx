@@ -11,6 +11,8 @@ import { Bounce, toast } from 'react-toastify';
 import '../../assets/Styles/scroleBarStyle.css'
 import { EmployeeDataInterface } from '../../interfaces/EmployeeInterface';
 import { useNavigate } from 'react-router-dom';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 
 
 
@@ -21,21 +23,28 @@ const Leads = () => {
     const [employeeList, setEmployeeList] = useState<EmployeeDataInterface[]>([])
     const [searchTerm, setSearchTerm] = useState<string>('');
     const [filteredEmployees, setFilteredEmployees] = useState<EmployeeDataInterface[]>([]);
+    const [page, setPage] = useState<number>(0);
+    const [pageCount, setPageCount] = useState(0)
 
     const navigate = useNavigate()
 
     useEffect(() => {
 
-        const newLeads = listNewLeads()
+        const newLeads = listNewLeads(page)
         newLeads.then((data) => {
             console.log('datddddda', data);
             if (data.response.status === 200) {
                 setLeads(data.response.newLeads)
+                setPageCount(data.response.count)
             } else {
                 console.log("error:", data.response.message);
             }
         })
-    }, [])
+    }, [page])
+
+    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+        setPage(value - 1)
+    };
 
     /* Handle row selection */
     const toggleRowSelection = (_id: string) => {
@@ -146,7 +155,7 @@ const Leads = () => {
                         Select Person
                     </button>
                 </div>
-                
+
             </div>
 
 
@@ -213,20 +222,20 @@ const Leads = () => {
                 <table className="w-full text-sm text-left text-gray-500">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 border-b-2 border-gray-300">
                         <tr>
-                            <th scope="col" className="py-3 px-6">
+                            <th scope="col" className="py-4 px-6">
                                 Select
                             </th>
-                            <th scope="col" className="py-3 px-6">Name</th>
-                            <th scope="col" className="py-3 px-6">Phone</th>
-                            <th scope="col" className="py-3 px-6">Email</th>
-                            <th scope="col" className="py-3 px-6">Company</th>
+                            <th scope="col" className="py-4 px-6">Name</th>
+                            <th scope="col" className="py-4 px-6">Phone</th>
+                            <th scope="col" className="py-4 px-6">Email</th>
+                            <th scope="col" className="py-4 px-6">Company</th>
                         </tr>
                     </thead>
                     <tbody>
                         {leads && leads.length > 0 ? (
                             leads.map(lead => (
                                 <tr key={lead._id} className="bg-white border-b">
-                                    <td className="py-4 px-6">
+                                    <td className="py-3 px-6">
                                         <input
                                             type="checkbox"
                                             checked={selectedRows.includes(lead._id!)}
@@ -234,19 +243,25 @@ const Leads = () => {
                                             className="cursor-pointer"
                                         />
                                     </td>
-                                    <td className="py-4 px-6">{lead.name}</td>
-                                    <td className="py-4 px-6">{lead.phone}</td>
-                                    <td className="py-4 px-6">{lead.email}</td>
-                                    <td className="py-4 px-6">{lead.company}</td>
+                                    <td className="py-3 px-6">{lead.name}</td>
+                                    <td className="py-3 px-6">{lead.phone}</td>
+                                    <td className="py-3 px-6">{lead.email}</td>
+                                    <td className="py-3 px-6">{lead.company}</td>
                                 </tr>
                             ))
                         ) : (
                             <tr>
-                                <td colSpan={5} className="py-4 px-6 text-center">No leads found</td>
+                                <td colSpan={5} className="py-3 px-6 text-center">No leads found</td>
                             </tr>
                         )}
                     </tbody>
                 </table>
+            </div>
+            <div className="flex justify-between mt-3 fixed bottom-6 ">
+                <h1 className="font-semibold text-[#7D50E1] ml-5">Page: {page + 1}</h1>
+                <Stack className="fixed right-5">
+                    <Pagination count={pageCount} shape="rounded" color="standard" onChange={handleChange} />
+                </Stack>
             </div>
         </div>
     );

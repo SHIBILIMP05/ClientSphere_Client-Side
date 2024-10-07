@@ -1,77 +1,62 @@
-import React, { useEffect, useState } from 'react';
-import { Dialog, DialogContent, DialogTitle, Typography, Button, Grid } from '@mui/material';
-import PhoneIcon from '@mui/icons-material/Phone';
-import CloseIcon from '@mui/icons-material/Close';
-import { fetchLeadInfo } from '../../services/apis/employeeApi';
-import { useSelector } from 'react-redux';
-import { RootState } from '../../store/store';
-import { LeadData } from '../../interfaces/LeadsInterfaces';
+import { Button, Typography, Grid, Chip } from "@mui/material"
 import EditNoteIcon from '@mui/icons-material/EditNote';
-import Chip from '@mui/material/Chip';
+import PhoneIcon from '@mui/icons-material/Phone';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+import { useEffect, useState } from "react";
+import { fetchLeadInfo } from "../../services/apis/employeeApi";
+import { useSelector } from "react-redux";
+import { RootState } from "../../store/store";
+import { LeadData } from "../../interfaces/LeadsInterfaces";
+import { useNavigate, useParams } from "react-router-dom";
+import EditLeadDetails from "./EditLeadDetails";
+import { boolean } from "yup";
 
 
-interface Props {
-    handleClose: React.Dispatch<React.SetStateAction<boolean>>;
-    handleIs_open: React.Dispatch<React.SetStateAction<boolean>>;
-    open: boolean;
-    selectedLeadId: string;
-}
 
-const LeadDetailsPopup = ({ open, handleClose, selectedLeadId, handleIs_open }: Props) => {
-    const employe = useSelector((state: RootState) => state.Employe)
+const LeadDetails = () => {
+
     const [leadInfo, setLeadInfo] = useState<LeadData>()
+    const [editOpen, setEditOpen] = useState<boolean>(false)
 
-
-
+    const { leadId } = useParams()
+    const navigate = useNavigate()
+    const employe = useSelector((state: RootState) => state.Employe)
 
     useEffect(() => {
-        const status = fetchLeadInfo(selectedLeadId, employe.id)
+        const status = fetchLeadInfo(leadId, employe.id)
         status.then((data) => {
             setLeadInfo(data.response.leadInfo)
         })
     }, [])
 
-
+    /* handle edit popup */
+    const handleEditPopup = () => {
+        setEditOpen(!editOpen)
+    }
     return (
         <>
-            <Dialog
-                slotProps={{
-                    backdrop: {
-                        sx: {
-                            backgroundColor: 'rgba(255, 255, 255, 0.3)',
-                            backdropFilter: 'blur(0.8px)',
-                        },
-                    },
-                }}
-                open={open}
-                onClose={handleClose}
-                maxWidth="lg"
-                fullWidth
-                PaperProps={{
-                    style: {
-                        borderRadius: 16,
-                        maxWidth: '64rem',
-                    },
-                }}
-            >
-                <DialogTitle className="flex justify-between items-center p-6 border-b">
-                    <Typography variant="h5" component="div" className="text-2xl font-semibold">
-                        Leads Details
-                    </Typography>
+            <div className="bg-white mt-3 rounded-md shadow-md">
+                <div className="flex justify-between items-center p-3 border-b ">
+                    <div className="flex">
+                        <Button onClick={() => navigate('/employee/leads/')} className="text-gray-700 hover:text-gray-600  ">
+                            <ArrowBackIcon color="action" />
+                        </Button>
+                        <Typography variant="h5" component="div" className="text-2xl font-semibold">
+                            Leads Details
+                        </Typography>
+                    </div>
                     <div className='space-x-1'>
 
                         <Button className="text-gray-700 hover:text-gray-600 min-w-0 p-0">
                             <PhoneIcon fontSize='medium' color='success' />
                         </Button>
-                        <Button onClick={() => (handleIs_open(true))} className="text-gray-700 hover:text-gray-600 min-w-0 p-0">
+                        <Button onClick={handleEditPopup} className="text-gray-700 hover:text-gray-600 min-w-0 p-0">
                             <EditNoteIcon fontSize='medium' />
                         </Button>
-                        <Button onClick={() => handleClose(false)} className="text-gray-700 hover:text-gray-600 min-w-0 p-0">
-                            <CloseIcon color='action' />
-                        </Button>
+
                     </div>
-                </DialogTitle>
-                <DialogContent sx={{ padding: '24px' }} className="p-6">
+                </div>
+                <div className="p-6">
                     <Grid container spacing={6} >
                         <Grid item xs={12} md={6}>
 
@@ -187,8 +172,8 @@ const LeadDetailsPopup = ({ open, handleClose, selectedLeadId, handleIs_open }: 
                             <Typography variant="h6" sx={{ fontSize: '1.125rem', fontWeight: '750', marginTop: '0.6rem' }}>
                                 Documents
                             </Typography>
-                            <div className="bg-gray-100 rounded-lg p-8 flex flex-col items-center justify-center">
-                                <div className="bg-gray-200 p-4 rounded-lg mb-4">
+                            <div className="bg-gray-200 rounded-lg p-8 flex flex-col items-center justify-center">
+                                <div className="bg-gray-300 p-4 rounded-lg mb-4">
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
                                         width="48"
@@ -212,19 +197,18 @@ const LeadDetailsPopup = ({ open, handleClose, selectedLeadId, handleIs_open }: 
                             <Typography variant="h6" sx={{ fontSize: '1.125rem', fontWeight: '750', marginTop: '0.6rem' }}>
                                 Description Information
                             </Typography>
-                            <div className="bg-gray-100 rounded-lg p-8 flex flex-col items-center justify-center">
+                            <div className="bg-gray-200 rounded-lg p-8 flex flex-col items-center justify-center">
                                 <Typography variant="body1" className="text-purple-700 font-semibold">
                                     Description is Empty
                                 </Typography>
                             </div>
                         </Grid>
                     </Grid>
-                </DialogContent>
-            </Dialog>
-
-
+                </div>
+            </div>
+            {editOpen && <EditLeadDetails editOpen={editOpen} handleEditPopup={handleEditPopup} leadId={leadId} />}
         </>
-    );
-};
+    )
+}
 
-export default LeadDetailsPopup;
+export default LeadDetails
