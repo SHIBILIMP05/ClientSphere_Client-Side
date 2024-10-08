@@ -9,7 +9,6 @@ import { RootState } from "../../store/store";
 import { LeadData } from "../../interfaces/LeadsInterfaces";
 import { useNavigate, useParams } from "react-router-dom";
 import EditLeadDetails from "./EditLeadDetails";
-import { boolean } from "yup";
 
 
 

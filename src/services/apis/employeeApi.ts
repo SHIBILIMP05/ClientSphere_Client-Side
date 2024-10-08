@@ -105,3 +105,19 @@ export const addLead = async (empId: string, leadData: LeadData) => {
 
     }
 }
+
+export const uplodExcelFile = async (file: File, empId: string) => {
+    try {
+        console.log("file",file);
+        
+        const formData = new FormData();
+        formData.append('excelFile', file);
+        const response = await employeInstance.post(`/api/employee/${empId}/upload-excelFile`, formData, {
+            headers: { 'Content-Type': 'multipart/form-data' }
+        })
+        return response.data
+    } catch (error) {
+        console.error(error);
+
+    }
+}
